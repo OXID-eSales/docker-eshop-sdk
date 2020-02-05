@@ -1,0 +1,11 @@
+# IDE/editors
+*.swp
+
+# Application specific
+data/oxideshop/*
+!data/oxideshop/.gitkeep
+.env
+
+# PHPStorm
+.idea/
+tmp/

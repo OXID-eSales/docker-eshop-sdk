@@ -1,0 +1,102 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - db-vol:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: oxid
+      MYSQL_USER: root
+      MYSQL_PASSWORD: oxid
+      MYSQL_ROOT_PASSWORD: oxid
+      TZ: Europe/Berlin
+    ports:
+        - 3306:3306
+    networks:
+      - internal
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - internal
+
+  php:
+    build:
+      context: build/php/
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        HOST_USER_ID: ${HOST_USER_ID}
+        HOST_GROUP_ID: ${HOST_GROUP_ID}
+    restart: always
+    environment:
+      SHOP_SETUP_PATH: ${SHOP_SETUP_PATH}
+      SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
+      SHOP_URL: "http://oxideshop.localhost/"
+      SELENIUM_SERVER_IP: "selenium"
+    volumes:
+      - type: bind
+        source: ${PWD}/data/oxideshop
+        target: /var/www/oxideshop
+        consistency: consistent
+        bind:
+          propagation: shared
+      - type: bind
+        source: ${PWD}/data/composer
+        target: /home/oxid/.composer/
+        consistency: consistent
+        bind:
+          propagation: shared
+    depends_on:
+      - db
+      - mailhog
+    hostname: oxideshop.localhost
+    ports:
+      - 80:80
+    networks:
+      - internal
+
+  selenium:
+    image: oxidesales/oxideshop-docker-selenium:S2FF31
+    restart: always
+    depends_on:
+      - php
+    ports:
+      - 4444:4444
+      - 5900:5900
+    networks:
+      - internal
+    volumes:
+      - type: bind
+        source: ${PWD}/data/oxideshop
+        target: /var/www/oxideshop
+        consistency: consistent
+        bind:
+          propagation: shared
+      - /dev/shm:/dev/shm
+
+  sphinx:
+    restart: "no"
+    build:
+      context: build/sphinx/
+    volumes:
+      - type: bind
+        source: ${PWD}/data/
+        target: /doc
+        consistency: consistent
+        bind:
+          propagation: shared
+    working_dir: /doc
+    user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
+
+networks:
+  internal:
+
+volumes:
+  db-vol:
