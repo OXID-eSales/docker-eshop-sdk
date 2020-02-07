@@ -2,7 +2,7 @@
 
 ![Docker](/assets/docker-vector-logo.svg?raw=true&sanitize=true "Docker")
 
-This docker based development environment is may be used for local OXID eShop development and not for production.
+This docker based development environment may be used for local OXID eShop development and not for production.
 
 ## Dependencies
 
