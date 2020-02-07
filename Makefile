@@ -36,6 +36,7 @@ data/oxideshop/composer.json: data/oxideshop/
 
 data/oxideshop/:
 	git clone git@github.com:OXID-eSales/oxideshop_ce.git data/oxideshop
+	mkdir data/oxideshop/debug
 
 permissions: data/oxideshop/ data/oxideshop/source/config.inc.php
 	chmod 777 data/oxideshop/source/tmp/ \

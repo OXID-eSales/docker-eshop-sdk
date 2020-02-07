@@ -42,6 +42,10 @@ RUN apt-get update -y \
     && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.trace_enable_trigger = true" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.trace_output_dir = /var/www/oxideshop/debug/" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.profiler_enable_trigger = true" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.profiler_output_dir = /var/www/oxideshop/debug/" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && curl --silent --show-error https://getcomposer.org/installer | php \
     && mv /var/www/html/composer.phar /usr/local/bin/composer \
     && groupadd -f -g $HOST_GROUP_ID oxid \
@@ -50,9 +54,8 @@ RUN apt-get update -y \
     && printf "host mailhog\nport 1025" >> /etc/msmtprc \
     && a2enmod rewrite \
     && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-RUN docker-php-ext-install opcache
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && docker-php-ext-install opcache
 
 ENV APACHE_RUN_USER=oxid
 ENV APACHE_RUN_GROUP=oxid

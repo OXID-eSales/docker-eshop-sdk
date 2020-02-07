@@ -68,6 +68,9 @@ $ docker-compose exec php composer -V
 $ docker-compose exec php composer why oxid-esales/oxideshop-composer-plugin
 ```
 
+### Using xDebug
+
+The profiles and traces from xDebug will be dumped to `data/oxideshop/debug/` directory
 
 ## Troubleshooting
 
