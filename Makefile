@@ -22,7 +22,7 @@ up:
 init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
 
 .env: .env.dist
-	cp .env.dist .env
+	if [ ! -f .env ]; then cp .env.dist .env; fi
 
 composer: data/oxideshop/vendor/
 
