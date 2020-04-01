@@ -1,4 +1,4 @@
-ARG PHP_VERSION=7.1
+ARG PHP_VERSION=7.3
 FROM php:${PHP_VERSION}-apache
 
 ARG HOST_USER_ID
@@ -6,7 +6,7 @@ ARG HOST_GROUP_ID
 
 ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libonig5 libzip-dev"
 ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev libonig-dev"
-ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli"
+ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli exif"
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 
