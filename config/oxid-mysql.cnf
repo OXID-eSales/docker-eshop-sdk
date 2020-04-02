@@ -1,0 +1,6 @@
+[mysqld]
+innodb_flush_log_at_trx_commit = 0
+innodb_flush_log_at_timeout = 10
+innodb_flush_method = O_DIRECT_NO_FSYNC
+innodb_file_per_table = ON
+innodb_stats_on_metadata = OFF
