@@ -74,6 +74,12 @@ The profiles and traces from xDebug will be dumped to `data/oxideshop/debug/` di
 
 ## Troubleshooting
 
+### Permission problems
+
+When you see `composer install` or `composer update` failing due to permission problems, it might be that your `HOST_USER_ID` and `HOST_GROUP_ID` values in `.env` file are wrong. The `make  init` step tries to use the `/usr/bin/id` command to get the correct values, but could fail doing so.
+
+To recover from this you need to set the correct `HOST_USER_ID` and `HOST_GROUP_ID` values in `.env` file and then `docker-composer build --no-cache` to enforce a rebuild of the container.
+
 ### Port conflicts
 
 If any ports are already in use on your host you might need to change the bindings in the "ports:" section of the affected service.
