@@ -1,4 +1,7 @@
-PHONY: init permissions up doc wiki test reset coverage
+PHONY: init permissions up doc wiki test reset coverage shell
+
+shell:
+	docker-compose exec --user oxid php bash
 
 test:
 	docker-compose exec -T --user oxid php php vendor/bin/runtests
