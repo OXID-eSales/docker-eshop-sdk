@@ -9,4 +9,5 @@ RUN apt-get update && \
     pip install sphinx_rtd_theme && \
     pip install sphinxcontrib-httpdomain && \
     pip install sphinxcontrib_plantuml && \
+    pip install sphinxcontrib_phpdomain && \
     java -jar ./usr/share/plantuml/plantuml.jar -testdot
