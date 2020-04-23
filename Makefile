@@ -34,6 +34,12 @@ init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/sou
 
 composer: data/oxideshop/vendor/
 
+migrate:
+	docker-compose exec -T --user oxid php php vendor/bin/oe-eshop-db_migrate migrations:migrate
+
+migration:
+	docker-compose exec -T --user oxid php php vendor/bin/oe-eshop-db_migrate migrations:generate
+
 data/oxideshop/vendor/: data/oxideshop/composer.lock
 	docker-compose run -T --rm --no-deps --user oxid php composer install
 
