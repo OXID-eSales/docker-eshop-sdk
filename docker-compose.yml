@@ -39,8 +39,8 @@ services:
     environment:
       SHOP_SETUP_PATH: ${SHOP_SETUP_PATH}
       SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
-      SHOP_URL: "http://oxideshop.localhost/"
-      SELENIUM_SERVER_IP: "selenium"
+      SHOP_URL: "http://oxideshop.local/"
+      SELENIUM_SERVER_HOST: "selenium"
     volumes:
       - type: bind
         source: ${PWD}/data/oxideshop
@@ -57,7 +57,6 @@ services:
     depends_on:
       - db
       - mailhog
-    hostname: oxideshop.localhost
     ports:
       - 80:80
     networks:
@@ -73,6 +72,8 @@ services:
       - 5900:5900
     networks:
       - internal
+    links:
+      - "php:oxideshop.local"
     volumes:
       - type: bind
         source: ${PWD}/data/oxideshop

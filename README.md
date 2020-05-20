@@ -24,8 +24,8 @@ $ make init
 
 ### Access the Demoshop
 
-* Shop: http://oxideshop.localhost/
-* Administration: http://oxideshop.localhost/admin/
+* Shop: http://oxideshop.local/
+* Administration: http://oxideshop.local/admin/
   * User: `admin`
   * Password: `admin`
 
