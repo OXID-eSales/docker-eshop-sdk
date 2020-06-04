@@ -38,20 +38,6 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/* \
     && echo "sendmail_path=/usr/bin/msmtp -t" > /usr/local/etc/php/conf.d/php-sendmail.ini \
     && echo "memory_limit = $PHP_MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-limit-php.ini \
-    && echo "xdebug.remote_enable = on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && if [[ $DEV_ENVIROMENT = PHPSTORM ]];then \
-	    echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-	    && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-	    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-	    && echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-	;else \
-	    echo "xdebug.remote_autostart = on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-	    && echo "xdebug.remote_host = 172.17.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \ 
-	;fi \
-    && echo "xdebug.trace_enable_trigger = true" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.trace_output_dir = /var/www/oxideshop/debug/" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.profiler_enable_trigger = true" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.profiler_output_dir = /var/www/oxideshop/debug/" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && curl --silent --show-error https://getcomposer.org/installer | php \
     && mv /var/www/html/composer.phar /usr/local/bin/composer \
     && groupadd -f -g $HOST_GROUP_ID oxid \
@@ -62,6 +48,10 @@ RUN apt-get update -y \
     && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && docker-php-ext-install opcache
+
+COPY ${DEV_ENVIROMENT}.xdebug.ini /tmp/docker-php-ext-xdebug.ini
+
+RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini  && rm -f /tmp/docker-php-ext-xdebug.ini
 
 ENV APACHE_RUN_USER=oxid
 ENV APACHE_RUN_GROUP=oxid
