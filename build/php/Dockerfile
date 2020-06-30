@@ -13,18 +13,16 @@ ARG PHP_HOST_IP="172.17.0.1"
 
 ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
 
-SHELL ["/bin/bash", "-c"]
-
 # install dependencies and cleanup (needs to be one step, as else it will cache in the laver)
 RUN apt-get update -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         $RUNTIME_PACKAGE_DEPS \
         $BUILD_PACKAGE_DEPS \
-    && if [[ $PHP_VERSION = 7.4* ]]; \
+    && if [ `expr substr $PHP_VERSION 1 3` = "7.4" ]; \
        then docker-php-ext-configure gd --with-jpeg; \
        else docker-php-ext-configure gd --with-jpeg-dir=/usr/local; \
        fi \
-    && if [[ $PHP_VERSION = 7.4* ]]; \
+    && if [ `expr substr $PHP_VERSION 1 3` = "7.4" ]; \
        then docker-php-ext-configure zip; \
        else docker-php-ext-configure zip --with-libzip=/usr/include; \
        fi \
@@ -45,8 +43,8 @@ RUN apt-get update -y \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
     && printf "host mailhog\nport 1025" >> /etc/msmtprc \
     && a2enmod rewrite \
-    && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
+    && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && docker-php-ext-install opcache
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
