@@ -10,4 +10,5 @@ RUN apt-get update && \
     pip install sphinxcontrib-httpdomain && \
     pip install sphinxcontrib_plantuml && \
     pip install sphinxcontrib_phpdomain && \
+    pip install pygments-graphql && \
     java -jar ./usr/share/plantuml/plantuml.jar -testdot
