@@ -6,7 +6,7 @@ ARG HOST_GROUP_ID
 
 ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libonig5 libzip-dev vim"
 ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev libonig-dev"
-ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli exif"
+ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli exif opcache"
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 ARG PHP_HOST_IP="172.17.0.1"
@@ -44,8 +44,7 @@ RUN apt-get update -y \
     && printf "host mailhog\nport 1025" >> /etc/msmtprc \
     && a2enmod rewrite \
     && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
-    && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
-    && docker-php-ext-install opcache
+    && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
