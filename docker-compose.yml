@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: oxid
       TZ: Europe/Berlin
     ports:
-        - 3306:3306
+      - 3306:3306
     networks:
       - internal
 
