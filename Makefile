@@ -68,6 +68,7 @@ data/oxideshop/source/config.inc.php: data/oxideshop/source/config.inc.php.dist
 	    -e 's/<dbUser>/root/' \
 	    -e 's/<dbName>/oxid/' \
 	    -e 's/<dbPwd>/oxid/' \
+	    -e 's/<dbPort>/3306/' \
 	    -e 's/<sShopURL>/http:\/\/oxideshop.local\//' \
 	    -e 's/<sShopDir>/\/var\/www\/oxideshop\/source/' \
 	    -e 's/<sCompileDir>/\/var\/www\/oxideshop\/source\/tmp/' data/oxideshop/source/config.inc.php
