@@ -38,7 +38,7 @@ down:
 restart:
 	docker-compose restart
 	
-log:
+show-log:
 	docker-compose exec -T --user oxid php tail -f /var/www/oxideshop/source/log/oxideshop.log
 
 init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
