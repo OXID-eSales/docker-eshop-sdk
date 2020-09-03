@@ -1,4 +1,4 @@
-PHONY: init permissions up doc wiki test reset coverage shell
+PHONY: init permissions up down reset doc wiki test reset reset-db coverage shell clean composer
 
 shell:
 	docker-compose exec --user oxid php bash
@@ -12,20 +12,19 @@ test:
 coverage:
 	docker-compose exec -T --user oxid php php vendor/bin/runtests-coverage
 
-reset:
+reset-db:
 	docker-compose exec -T --user oxid php php vendor/bin/reset-shop
 	
-composer-update:
+clean:
 	rm data/oxideshop/vendor/ -rf
-	rm data/oxideshop/composer.lock
-	rm -rf data/oxideshop/source/tmp/*
+	rm data/oxideshop/composer.lock -f
+	rm data/oxideshop/source/tmp/* -rf
 	rm data/oxideshop/source/Application/views/flow/ -rf
 	rm data/oxideshop/source/Application/views/azure/ -rf
-	>data/oxideshop/var/configuration/shops/1.yaml
-	docker-compose exec -T --user oxid php composer update
-	docker-compose exec -T --user oxid php php vendor/bin/reset-shop
-	
-	
+	rm data/oxideshop/var/ -rf
+
+reset: clean data/oxideshop/vendor/ reset-db
+
 doc: data/dev-doc/build/
 
 wiki: data/dev-wiki/build/
