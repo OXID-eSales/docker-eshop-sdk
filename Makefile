@@ -14,13 +14,33 @@ coverage:
 
 reset:
 	docker-compose exec -T --user oxid php php vendor/bin/reset-shop
-
+	
+composer-update:
+	rm data/oxideshop/vendor/ -rf
+	rm data/oxideshop/composer.lock
+	rm -rf data/oxideshop/source/tmp/*
+	rm data/oxideshop/source/Application/views/flow/ -rf
+	rm data/oxideshop/source/Application/views/azure/ -rf
+	>data/oxideshop/var/configuration/shops/1.yaml
+	docker-compose exec -T --user oxid php composer update
+	docker-compose exec -T --user oxid php php vendor/bin/reset-shop
+	
+	
 doc: data/dev-doc/build/
 
 wiki: data/dev-wiki/build/
 
 up:
-	docker-compose up -d php
+	docker-compose up -d
+	
+down: 
+	docker-compose down
+
+restart:
+	docker-compose restart
+	
+log:
+	docker-compose exec -T --user oxid php tail -f /var/www/oxideshop/source/log/oxideshop.log
 
 init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
 
