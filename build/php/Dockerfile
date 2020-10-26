@@ -36,8 +36,6 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/* \
     && echo "sendmail_path=/usr/bin/msmtp -t" > /usr/local/etc/php/conf.d/php-sendmail.ini \
     && echo "memory_limit = $PHP_MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-limit-php.ini \
-    && curl --silent --show-error https://getcomposer.org/installer | php \
-    && mv /var/www/html/composer.phar /usr/local/bin/composer \
     && groupadd -f -g $HOST_GROUP_ID oxid \
     && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
@@ -45,6 +43,8 @@ RUN apt-get update -y \
     && a2enmod rewrite \
     && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
     && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
