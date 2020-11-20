@@ -4,10 +4,15 @@ FROM php:${PHP_VERSION}-apache
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
 
+ARG NEW_RELIC_AGENT_VERSION
+ARG NEW_RELIC_LICENSE_KEY
+ARG NEW_RELIC_APPNAME
+ARG NEW_RELIC_DAEMON_ADDRESS
+
 ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libonig5 libzip-dev vim"
 ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev libonig-dev"
 ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli exif opcache"
-ARG PECL_DEPS="xdebug"
+ARG PECL_DEPS="xdebug apcu"
 ARG PHP_MEMORY_LIMIT="-1"
 ARG PHP_HOST_IP="172.17.0.1"
 
@@ -29,6 +34,7 @@ RUN apt-get update -y \
     && docker-php-ext-install -j$(nproc) $PHP_EXT_DEPS \
     && pecl install $PECL_DEPS \
     && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable apcu \
     && docker-php-source delete \
     && apt-get clean \
     && apt-get autoremove -y \
@@ -43,6 +49,16 @@ RUN apt-get update -y \
     && a2enmod rewrite \
     && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
     && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+RUN curl -L "https://download.newrelic.com/php_agent/archive/${NEW_RELIC_AGENT_VERSION}/newrelic-php5-${NEW_RELIC_AGENT_VERSION}-linux.tar.gz" | tar -C /tmp -zx \
+ && export NR_INSTALL_USE_CP_NOT_LN=1 \
+ && export NR_INSTALL_SILENT=1 \
+ && /tmp/newrelic-php5-*/newrelic-install install \
+ && rm -rf /tmp/newrelic-php5-* /tmp/nrinstall* \
+ && sed -i -e s/\"REPLACE_WITH_REAL_KEY\"/${NEW_RELIC_LICENSE_KEY}/ \    
+     -e s/newrelic.appname[[:space:]]=[[:space:]].\*/newrelic.appname="${NEW_RELIC_APPNAME}"/ \
+     -e s/\;newrelic.daemon.address[[:space:]]=[[:space:]].\*/newrelic.daemon.address="${NEW_RELIC_DAEMON_ADDRESS}"/ \
+    /usr/local/etc/php/conf.d/newrelic.ini
 
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 

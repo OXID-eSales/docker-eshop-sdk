@@ -28,6 +28,11 @@ services:
     networks:
       - internal
 
+  nr-daemon:
+    image: newrelic/php-daemon
+    networks:
+      - internal
+
   php:
     build:
       context: build/php/
@@ -36,6 +41,10 @@ services:
         HOST_USER_ID: ${HOST_USER_ID}
         HOST_GROUP_ID: ${HOST_GROUP_ID}
         PHP_HOST_IP: ${PHP_HOST_IP}
+        NEW_RELIC_AGENT_VERSION: ${NEW_RELIC_AGENT_VERSION}
+        NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
+        NEW_RELIC_APPNAME: ${NEW_RELIC_APPNAME}
+        NEW_RELIC_DAEMON_ADDRESS: "nr-daemon:31339"
     restart: always
     environment:
       SHOP_SETUP_PATH: ${SHOP_SETUP_PATH}
@@ -58,6 +67,7 @@ services:
     depends_on:
       - db
       - mailhog
+      - nr-daemon
     hostname: oxideshop.local
     ports:
       - 80:80
