@@ -65,7 +65,7 @@ services:
       - internal
 
   selenium:
-    image: oxidesales/oxideshop-docker-selenium:${SELENIUM_FIREFOX}
+    image: ${SELENIUM_IMAGE}
     restart: always
     depends_on:
       - php
