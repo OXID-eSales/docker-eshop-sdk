@@ -42,6 +42,7 @@ services:
       SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
       SHOP_URL: "http://oxideshop.local/"
       SELENIUM_SERVER_HOST: "selenium"
+      SELENIUM_BROWSER: ${SELENIUM_BROWSER}
     volumes:
       - type: bind
         source: ${PWD}/data/oxideshop
