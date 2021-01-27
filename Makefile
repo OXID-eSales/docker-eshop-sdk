@@ -41,7 +41,7 @@ restart:
 show-log:
 	docker-compose exec -T --user oxid php tail -f /var/www/oxideshop/source/log/oxideshop.log
 
-init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
+init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset-db
 
 .env: .env.dist
 	if [ ! -f .env ]; then \
