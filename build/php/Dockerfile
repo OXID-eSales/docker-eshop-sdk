@@ -46,13 +46,14 @@ RUN apt-get update -y \
     && printf "host mailhog\nport 1025" >> /etc/msmtprc \
     && a2enmod rewrite \
     && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
-    && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+    && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
-RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini  && rm -f /tmp/docker-php-ext-xdebug.ini
+RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_CONFIG="remote_mode=req remote_host=$PHP_HOST_IP remote_connect_back=0"
 
