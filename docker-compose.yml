@@ -10,7 +10,7 @@ services:
       - ${PWD}/config/oxid-mysql.cnf:/etc/mysql/conf.d/oxid-mysql.cnf
     environment:
       MYSQL_DATABASE: oxid
-      MYSQL_USER: root
+      MYSQL_USER: oxid
       MYSQL_PASSWORD: oxid
       MYSQL_ROOT_PASSWORD: oxid
       TZ: Europe/Berlin
