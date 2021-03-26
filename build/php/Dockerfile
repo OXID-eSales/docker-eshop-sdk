@@ -54,10 +54,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
-RUN if [ $XDEBUG_NESTING_LEVEL ]; \
-        then echo "xdebug.max_nesting_level=$XDEBUG_NESTING_LEVEL" >> /tmp/docker-php-ext-xdebug.ini; \
-     fi \
-    && cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini  && rm -f /tmp/docker-php-ext-xdebug.ini
+RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_CONFIG="remote_mode=req remote_host=$PHP_HOST_IP remote_connect_back=0"
 
