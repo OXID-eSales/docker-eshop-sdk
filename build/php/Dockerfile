@@ -11,7 +11,6 @@ ARG PHP_EXT_DEPS="curl xml json mbstring zip bcmath soap pdo_mysql gd mysqli exi
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 ARG PHP_HOST_IP="172.17.0.1"
-ARG XDEBUG_NESTING_LEVEL=""
 
 ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
 
