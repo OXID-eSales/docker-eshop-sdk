@@ -11,6 +11,7 @@ ARG PHP_EXT_DEPS="curl xml json mbstring zip bcmath soap pdo_mysql gd mysqli exi
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 ARG PHP_HOST_IP="172.17.0.1"
+ARG XDEBUG_NESTING_LEVEL=""
 
 ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
 
@@ -53,7 +54,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
-RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
+RUN if [ $XDEBUG_NESTING_LEVEL ]; \
+        then echo "xdebug.max_nesting_level=$XDEBUG_NESTING_LEVEL" >> /tmp/docker-php-ext-xdebug.ini; \
+     fi \
+    && cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini  && rm -f /tmp/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_CONFIG="remote_mode=req remote_host=$PHP_HOST_IP remote_connect_back=0"
 
