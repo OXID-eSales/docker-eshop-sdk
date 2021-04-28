@@ -1,4 +1,6 @@
 ARG PHP_VERSION=8.0
+ARG COMPOSER_VERSION=2
+FROM composer:${COMPOSER_VERSION} as composer
 FROM php:${PHP_VERSION}-apache
 
 ARG HOST_USER_ID=1000
@@ -38,22 +40,33 @@ RUN apt-get update -y \
     && apt-get autoremove -y \
     && apt-get purge -y --auto-remove $BUILD_PACKAGE_DEPS \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "sendmail_path=/usr/bin/msmtp -t" > $PHP_INI_DIR/conf.d/php-sendmail.ini \
-    && echo "memory_limit = $PHP_MEMORY_LIMIT" > $PHP_INI_DIR/conf.d/memory-limit-php.ini \
-    && groupadd -f -g $HOST_GROUP_ID oxid \
+    && mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# user/group config
+RUN groupadd -f -g $HOST_GROUP_ID oxid \
     && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
-    && printf "host mailhog\nport 1025" >> /etc/msmtprc \
+\
+# apache config
     && a2enmod rewrite \
     && sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
     && sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
-    && mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
-
-RUN cat /tmp/docker-php-ext-xdebug.ini >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
+\
+# set up mailhog as sendmail target
+    && echo "host mailhog" >> /etc/msmtprc \
+    && echo "port 1025" >> /etc/msmtprc \
+    && echo "sendmail_path=/usr/bin/msmtp -t" >> $PHP_INI_DIR/conf.d/php-sendmail.ini \
+\
+# configure xdebug
+    && echo "xdebug.mode = debug,trace,profile,coverage,develop" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request  = trigger" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.trigger_value = PHPSTORM" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.discover_client_host = true" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_port = 9001" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.output_dir = /var/www/oxideshop/debug/" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.max_nesting_level = 512 # Max nesting level increase is required for GraphQL" >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_CONFIG="remote_mode=req remote_host=$PHP_HOST_IP remote_connect_back=0"
 
