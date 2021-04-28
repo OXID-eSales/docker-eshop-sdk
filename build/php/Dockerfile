@@ -38,8 +38,8 @@ RUN apt-get update -y \
     && apt-get autoremove -y \
     && apt-get purge -y --auto-remove $BUILD_PACKAGE_DEPS \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "sendmail_path=/usr/bin/msmtp -t" > /usr/local/etc/php/conf.d/php-sendmail.ini \
-    && echo "memory_limit = $PHP_MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-limit-php.ini \
+    && echo "sendmail_path=/usr/bin/msmtp -t" > $PHP_INI_DIR/conf.d/php-sendmail.ini \
+    && echo "memory_limit = $PHP_MEMORY_LIMIT" > $PHP_INI_DIR/conf.d/memory-limit-php.ini \
     && groupadd -f -g $HOST_GROUP_ID oxid \
     && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
@@ -53,7 +53,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY xdebug.ini /tmp/docker-php-ext-xdebug.ini
 
-RUN cat /tmp/docker-php-ext-xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
+RUN cat /tmp/docker-php-ext-xdebug.ini >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini && rm -f /tmp/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_CONFIG="remote_mode=req remote_host=$PHP_HOST_IP remote_connect_back=0"
 
