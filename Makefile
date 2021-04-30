@@ -68,7 +68,7 @@ data/oxideshop/composer.lock: data/oxideshop/composer.json
 data/oxideshop/composer.json: data/oxideshop/
 
 data/oxideshop/:
-	git clone git@github.com:OXID-eSales/oxideshop_ce.git data/oxideshop
+	git clone -b b-6.3.x --single-branch git@github.com:OXID-eSales/oxideshop_ce.git data/oxideshop
 	mkdir data/oxideshop/debug
 
 permissions: data/oxideshop/ data/oxideshop/source/config.inc.php
