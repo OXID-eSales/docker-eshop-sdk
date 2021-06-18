@@ -18,6 +18,11 @@ services:
       - 3306:3306
     networks:
       - internal
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
@@ -27,6 +32,11 @@ services:
       - 8025:8025
     networks:
       - internal
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   php:
     build:
@@ -64,6 +74,11 @@ services:
       - 80:80
     networks:
       - internal
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   selenium:
     image: ${SELENIUM_IMAGE}
@@ -85,6 +100,11 @@ services:
         bind:
           propagation: shared
       - /dev/shm:/dev/shm
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   sphinx:
     restart: "no"
@@ -99,6 +119,11 @@ services:
           propagation: shared
     working_dir: /doc
     user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
 networks:
   internal:
