@@ -3,11 +3,11 @@ version: '3.7'
 services:
 
   db:
-    image: ${DATABASE_IMAGE}
+    image: ${DATABASE_CONTAINER}:${DATABASE_VERSION}
     restart: always
     volumes:
-      - db-vol:/var/lib/mysql
       - ${PWD}/config/oxid-mysql.cnf:/etc/mysql/conf.d/oxid-mysql.cnf
+      - ./data/db-${DATABASE_CONTAINER}_${DATABASE_VERSION}:/var/lib/mysql
     environment:
       MYSQL_DATABASE: oxid
       MYSQL_USER: oxid
@@ -127,6 +127,3 @@ services:
 
 networks:
   internal:
-
-volumes:
-  db-vol:
