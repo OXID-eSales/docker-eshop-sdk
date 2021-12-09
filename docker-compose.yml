@@ -6,8 +6,8 @@ services:
     image: ${DATABASE_CONTAINER}:${DATABASE_VERSION}
     restart: always
     volumes:
+      - db-vol:/var/lib/mysql
       - ${PWD}/config/oxid-mysql.cnf:/etc/mysql/conf.d/oxid-mysql.cnf
-      - ./data/db-${DATABASE_CONTAINER}_${DATABASE_VERSION}:/var/lib/mysql
     environment:
       MYSQL_DATABASE: oxid
       MYSQL_USER: oxid
@@ -59,13 +59,13 @@ services:
         target: /var/www/oxideshop
         consistency: consistent
         bind:
-          propagation: shared
+          propagation: private
       - type: bind
         source: ${PWD}/data/composer
         target: /home/oxid/.composer/
         consistency: consistent
         bind:
-          propagation: shared
+          propagation: private
     depends_on:
       - db
       - mailhog
@@ -98,7 +98,7 @@ services:
         target: /var/www/oxideshop
         consistency: consistent
         bind:
-          propagation: shared
+          propagation: private
       - /dev/shm:/dev/shm
     logging:
       driver: "json-file"
@@ -116,7 +116,7 @@ services:
         target: /doc
         consistency: consistent
         bind:
-          propagation: shared
+          propagation: private
     working_dir: /doc
     user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
     logging:
@@ -127,3 +127,6 @@ services:
 
 networks:
   internal:
+
+volumes:
+  db-vol:
