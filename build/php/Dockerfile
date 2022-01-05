@@ -40,6 +40,7 @@ RUN apt-get update -y \
     && apt-get autoremove -y \
     && apt-get purge -y --auto-remove $BUILD_PACKAGE_DEPS \
     && rm -rf /var/lib/apt/lists/* \
+    && echo "memory_limit = $PHP_MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-limit-php.ini \
     && mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
