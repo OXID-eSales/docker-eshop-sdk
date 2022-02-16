@@ -122,13 +122,4 @@ Custom configuration file for php settings: ``containers/php-fpm/custom.ini``.
 ### Remote debugging with PHPSTORM
 
 * Configure the CLI Interpreter
-* Create a Server configuration and set mapping as source:/var/www/ 
-
-## Inspired by OXID :)
-* https://github.com/OXID-eSales/oxvm_base
-* https://github.com/OXID-eSales/oxvm_eshop
-* https://github.com/OXID-eSales/docker-eshop-sdk
-
-## Contributing
-
-You like to contribute? 🙌 AWESOME 🙌 Throw a pull request, with the description why you/we need it and instructions how to test it out :)
+* Create a Server configuration and set mapping as source:/var/www/
