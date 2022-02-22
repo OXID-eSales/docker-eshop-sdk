@@ -9,13 +9,12 @@ Php and Npm users are synced with the current user so we will have all the right
 For the start:
 
 * Apache 2.4 (based on original httpd:2.4-alpine container)
-* PHP 7.4 / 8.0 / 8.1 fpm (based on original php:x.x-fpm containers) with:
+* PHP 7.4 / 8.0 / 8.1 fpm (based on original oxidesales/oxideshop-docker-php containers) with:
   * composer 2
   * xDebug 3 with remote debug and profiler preconfigured
   * error reporting enabled
 * MySQL 5.7 with adminer (original mysql container used)
 * Mailhog preconfigured to catch outgoing emails
-* SPX preconfigured (PHP Simple Profiler - https://github.com/NoiseByNorthwest/php-spx)
 * Npm container preconfigured (based on node:latest)
 * Chrome based selenium service available, for running your selenium tests (based on selenium/standalone-chrome-debug)
 

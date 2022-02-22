@@ -8,12 +8,7 @@ ARG HOST_GROUP_ID
 ARG HOST_GROUP_NAME
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY spx.ini /usr/local/etc/php/conf.d/spx.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
-
-# install spx
-RUN cd /usr/lib && git clone https://github.com/NoiseByNorthwest/php-spx.git
-RUN cd /usr/lib/php-spx && phpize && ./configure && make && make install
 
 # set sendmail for php to ssmtp
 RUN printf "host mailhog\nport 1025" >> /etc/msmtprc
