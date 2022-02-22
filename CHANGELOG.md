@@ -1,8 +1,19 @@
-# Change Log for Sieg Development base
+# Change Log for OXID eShop SDK
 
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## Unreleased
+
+### Added
+
+### Changed
+- PHP container is now based on oxidesales/oxideshop-docker-php
+- Renamed directory from "php-fpm" to "php"
+- Extended description
+
+### Removed
 
 ## [v3.0.0] - 2022-02-04
 
@@ -35,7 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Move SPX package installation to base php container. 
   - 7.4 base container rebuilt with latest dependencies and spx.
   - It will allow faster start of the environment.
-- ``containers/php-fpm/user.ini`` is renamed to custom.ini.dist. Setup copies it to custom.ini 
+- ``containers/php/user.ini`` is renamed to custom.ini.dist. Setup copies it to custom.ini 
 
 ### Fixed
 - Fix wrong rights for ~/.composer directory. Now composer commands will work properly.
