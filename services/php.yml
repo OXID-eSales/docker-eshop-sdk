@@ -1,6 +1,6 @@
   php:
     build:
-      context: containers/php-fpm
+      context: containers/php
       args:
         PHP_VERSION: ${PHP_VERSION}
         HOST_USER_ID: ${HOST_USER_ID}
