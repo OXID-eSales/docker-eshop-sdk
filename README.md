@@ -28,7 +28,7 @@ For the start:
 ## Quick start
 
 ```
-git clone https://github.com/Sieg/development.git myProjectName
+git clone https://github.com/OXID-eSales/docker-eshop-sdk.git myProjectName
 cd myProjectName
 
 # get some information about whats possible
@@ -60,7 +60,7 @@ SPX preconfigured and UI accessible via http://localhost.local?SPX_KEY=dev&SPX_U
 This example shows more precise configuration which can be used for your project. It is real usage flow:
 
 ```
-git clone https://github.com/Sieg/development.git myProjectName
+git clone https://github.com/OXID-eSales/docker-eshop-sdk.git myProjectName
 cd myProjectName
 
 # setup rights and basic configuration files
