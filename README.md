@@ -118,7 +118,7 @@ Custom configuration file: ``containers/httpd/project.conf``.
 ### PHP
 
 Select PHP version to be used in docker-compose php container configuration.
-Custom configuration file for php settings: ``containers/php-fpm/custom.ini``.
+Custom configuration file for php settings: ``containers/php/custom.ini``.
 
 ### Remote debugging with PHPSTORM
 
