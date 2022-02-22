@@ -1,6 +1,6 @@
 ARG PHP_VERSION
 
-FROM siegfuse/php-fpm-${PHP_VERSION}-base:latest
+FROM oxidesales/oxideshop-docker-php:$PHP_VERSION
 
 ARG HOST_USER_ID
 ARG HOST_USER_NAME
@@ -10,6 +10,13 @@ ARG HOST_GROUP_NAME
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY spx.ini /usr/local/etc/php/conf.d/spx.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
+
+# install spx
+RUN cd /usr/lib && git clone https://github.com/NoiseByNorthwest/php-spx.git
+RUN cd /usr/lib/php-spx && phpize && ./configure && make && make install
+
+# set sendmail for php to ssmtp
+RUN printf "host mailhog\nport 1025" >> /etc/msmtprc
 
 RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
     useradd -m -d /home/$HOST_USER_NAME -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID $HOST_USER_NAME || true && \
