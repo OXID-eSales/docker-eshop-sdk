@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Extended description
 
 ### Removed
+- SPX
 
 ## [v3.0.0] - 2022-02-04
 

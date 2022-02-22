@@ -52,8 +52,6 @@ Adminer is available via http://localhost.local:8080
 
 Mailhog is available via http://localhost.local:8025/
 
-SPX preconfigured and UI accessible via http://localhost.local?SPX_KEY=dev&SPX_UI_URI=/
-
 ## Longer start
 
 This example shows more precise configuration which can be used for your project. It is real usage flow:
