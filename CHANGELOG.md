@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [v4.0.0] - Unreleased
 
 ### Added
+- Github is trusted by default
 
 ### Changed
 - PHP container is now based on oxidesales/oxideshop-docker-php
@@ -14,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Extended description
 
 ### Removed
-- SPX
+- SPX is not installed by default anymore
 
 ## [v3.0.0] - 2022-02-04
 
@@ -99,10 +100,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v1.0.0] - 2019-10-23
 
-[v3.0.0]: https://github.com/Sieg/development/compare/v2.0.0...v3.0.0
-[v2.0.0]: https://github.com/Sieg/development/compare/v1.4.0...v2.0.0
-[v1.4.0]: https://github.com/Sieg/development/compare/v1.3.0...v1.4.0
-[v1.3.0]: https://github.com/Sieg/development/compare/v1.2.0...v1.3.0
-[v1.2.0]: https://github.com/Sieg/development/compare/v1.1.0...v1.2.0
-[v1.1.0]: https://github.com/Sieg/development/compare/v1.0.0...v1.1.0
-[v1.0.0]: https://github.com/Sieg/development/compare/020f452b2a...v1.0.0
+[v4.0.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v3.0.0...master
+[v3.0.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v2.0.0...v3.0.0
+[v2.0.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v1.4.0...v2.0.0
+[v1.4.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v1.3.0...v1.4.0
+[v1.3.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v1.2.0...v1.3.0
+[v1.2.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v1.1.0...v1.2.0
+[v1.1.0]: https://github.com/OXID-eSales/docker-eshop-sdk/compare/v1.0.0...v1.1.0
+[v1.0.0]: https://github.com/OXID-eSales/docker-eshop-sdk/020f452b2a...v1.0.0
