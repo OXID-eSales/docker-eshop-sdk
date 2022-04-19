@@ -1,0 +1,13 @@
+  seleniumfirefox:
+    image: 'oxidesales/oxideshop-docker-selenium:S2FF31'
+    restart: always
+    depends_on:
+      - php
+    ports:
+      - 4445:4444
+      - 5901:5900
+    links:
+      - "apache:localhost.local"
+    volumes:
+      - ./source:/var/www
+      - /dev/shm:/dev/shm
