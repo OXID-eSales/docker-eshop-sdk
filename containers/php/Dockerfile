@@ -9,6 +9,10 @@ ARG HOST_GROUP_NAME
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
+COPY .bashrc_append ~/.bashrc_append
+
+# set loading of bashrc_append
+RUN printf "source ~/.bashrc_append" >> ~/.bashrc
 
 # set sendmail for php to ssmtp
 RUN printf "host mailhog\nport 1025" >> /etc/msmtprc
