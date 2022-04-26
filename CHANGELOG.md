@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - SPX is not installed by default anymore
+- .env file php version default value fixed
 
 ## [v3.0.0] - 2022-02-04
 
