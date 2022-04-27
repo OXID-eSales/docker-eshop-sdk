@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Github is trusted by default
+- Added environment variable for MySQL version
 
 ### Changed
 - PHP container is now based on oxidesales/oxideshop-docker-php
