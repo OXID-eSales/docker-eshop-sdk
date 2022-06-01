@@ -1,11 +1,11 @@
-nginx:
-  build:
-    context: containers/nginx
-  restart: always
-  ports:
-    - 80:80
-  depends_on:
-    - apache
-  volumes:
-    - ./source/source/modules/oe/nginx/ServerConfiguration/ClearCache.lua:/var/www/oxideshop/vendor/oxid-esales/nginx-module/ServerConfiguration/ClearCache.lua
-    - ./source/source/modules/oe/nginx/ServerConfiguration/nginx.conf:/etc/nginx/sites-enabled/default
+  nginx:
+    build:
+      context: containers/nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - apache
+    volumes:
+      - ./source/source/modules/oe/nginx/ServerConfiguration/ClearCache.lua:/var/www/oxideshop/vendor/oxid-esales/nginx-module/ServerConfiguration/ClearCache.lua
+      - ./source/source/modules/oe/nginx/ServerConfiguration/nginx.conf:/etc/nginx/sites-enabled/default
