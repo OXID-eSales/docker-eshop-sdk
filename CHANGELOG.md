@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added environment variable for MySQL version
 - Add NGINX container building Dockerfile
 - Add NGINX as reverse-proxy service
+- Add preconfigured Elasticsearch + Kibana services
 
 ### Changed
 - PHP container is now based on oxidesales/oxideshop-docker-php
