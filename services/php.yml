@@ -17,6 +17,8 @@
     depends_on:
       - mailhog
       - apache
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   mailhog:
     image: mailhog/mailhog

@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - SPX is not installed by default anymore
 - .env file php version default value fixed
 
+### Fixed
+- xDebug host calculation configuration improved to work on Mac and Windows WSL too
+
 ## [v3.0.0] - 2022-02-04
 
 ### Added
