@@ -9,7 +9,7 @@ help:
 	@echo "\n\
 	    \e[1;1;33mSome Help needed?\e[0m\n\n\
 	    \e[1;1;32mmake setup\e[0m - Prefills the .env file with sync required parameters \n\
-	        and prepares all modifieble custom files from dist. Run this \n\
+	        and prepares all modifiable custom files from dist. Run this \n\
 	        once before everything!\n\n\
 	    \e[1;1;32mmake addbasicservices\e[0m - Adds php, apache and mysql services \n\
 	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\n\
