@@ -5,6 +5,8 @@
     environment:
       MYSQL_DATABASE: example
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     volumes:
       - ./data/mysql:/var/lib/mysql
 
