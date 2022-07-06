@@ -1,5 +1,5 @@
   mysql:
-    image: mysql:${MYSQL_VERSION}
+    image: mysql:${MYSQL_VERSION}-debian
     restart: always
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     environment:
