@@ -4,3 +4,18 @@ DocumentRoot "/var/www/"
     AllowOverride All
     Require all granted
 </Directory>
+
+<VirtualHost _default_:443>
+    DocumentRoot "/var/www/"
+    ServerName localhost.local
+    ServerAlias oxideshop.local
+
+    SSLEngine on
+    <Directory "/var/www/">
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    SSLCertificateFile "/usr/local/apache2/conf/example.crt"
+    SSLCertificateKeyFile "/usr/local/apache2/conf/example.key"
+</VirtualHost>
