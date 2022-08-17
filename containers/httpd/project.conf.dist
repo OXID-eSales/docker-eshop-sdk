@@ -7,7 +7,9 @@ DocumentRoot "/var/www/"
 
 <VirtualHost _default_:443>
     DocumentRoot "/var/www/"
-    ServerName localhost.local:443
+    ServerName localhost.local
+    ServerAlias oxideshop.local
+
     SSLEngine on
     <Directory "/var/www/">
         AllowOverride All
