@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NGINX container building Dockerfile
 - Add NGINX as reverse-proxy service
 - Add preconfigured Elasticsearch + Kibana services
+- Add self-signed certificate with supported localhost.local and oxideshop.local domains
 
 ### Changed
 - PHP container is now based on oxidesales/oxideshop-docker-php
