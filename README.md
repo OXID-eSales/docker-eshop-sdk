@@ -9,6 +9,7 @@ Php and Npm users are synced with the current user so we will have all the right
 For the start:
 
 * Apache 2.4 (based on original httpd:2.4-alpine container)
+  * Some example SSL certificate added and HTTPS supported for https://localhost.local and https://oxideshop.local domains
 * PHP 7.4 / 8.0 / 8.1 fpm (based on oxidesales/oxideshop-docker-php containers which use the official php:x.x-fpm containers as a base) with:
   * composer 2
   * xDebug 3 with remote debug and profiler preconfigured
