@@ -1,6 +1,6 @@
-ARG PHP_VERSION
+ARG CI_IMAGE_TAG
 
-FROM oxidesales/oxideshop-docker-php:$PHP_VERSION
+FROM eu.gcr.io/oxid-ci/ci-test-shop:$CI_IMAGE_TAG
 
 ARG HOST_USER_ID
 ARG HOST_USER_NAME
@@ -21,4 +21,4 @@ RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
 RUN mkdir /home/$HOST_USER_NAME/.ssh && \
     ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
 
-WORKDIR /var/www/
+WORKDIR /var/www/oxideshop_template

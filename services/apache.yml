@@ -1,9 +1,9 @@
   apache:
     build:
       context: containers/httpd
-    working_dir: /var/www/
+    working_dir: /var/www/oxideshop_template
     volumes:
-      - ./source:/var/www
+      - ./source:/var/www/oxideshop_template
     ports:
       - 80:80
       - 443:443

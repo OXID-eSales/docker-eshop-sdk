@@ -25,7 +25,8 @@ setup:
 		sed "s/<userId>/$(USERID)/;\
 		     s/<userName>/$(USERNAME)/;\
 		     s/<groupId>/$(GROUPID)/;\
-		     s/<groupName>/$(GROUPNAME)/"\
+		     s/<groupName>/$(GROUPNAME)/;\
+		     s/<CI_IMAGE_TAG>/$(CI_IMAGE_TAG)/"\
 		> .env
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini

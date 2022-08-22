@@ -1,6 +1,0 @@
-{
-    "name": "root/www",
-    "require": {
-        "phpmailer/phpmailer": "^6.3"
-    }
-}
