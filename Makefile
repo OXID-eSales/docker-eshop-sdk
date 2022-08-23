@@ -33,6 +33,15 @@ setup:
 	@cp -n docker-compose.yml.dist docker-compose.yml
 	@echo "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m"
 
+config:
+	docker-compose exec php sed -i "s#dbHost = '127.0.0.1'#dbHost = 'mysql'#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#dbName = 'oxid'#dbName = 'example'#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#dbPwd  = 'oxid'#dbPwd  = 'root'#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#http://core-ci.oxid-esales.com/#http://localhost.local/#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#http://core-ci-private.oxid-esales.com/#http://localhost.local/#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#/var/www/oxideshop/source#/var/www/oxideshop_template/source#g;" /var/www/oxideshop_template/source/config.inc.php \
+    && docker-compose exec php sed -i "s#/var/www/oxideshop/source/tmp#/var/www/oxideshop_template/source/tmp#g;" /var/www/oxideshop_template/source/config.inc.php
+
 example:
 	@make addbasicservices
 	@./recipes/default/example/run.sh
@@ -45,6 +54,9 @@ down:
 
 php:
 	docker-compose exec php bash
+
+reset-shop:
+	docker-compose exec -T php php vendor/bin/reset-shop
 
 node:
 	docker-compose run --rm node bash
