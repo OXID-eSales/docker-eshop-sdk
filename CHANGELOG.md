@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NGINX as reverse-proxy service
 - Add preconfigured Elasticsearch + Kibana services
 - Add self-signed certificate with supported localhost.local and oxideshop.local domains
+- `make cleanup` command with all main artifacts removal to clean default state (composer cache is not cleared for now)
 
 ### Changed
 - PHP container is now based on oxidesales/oxideshop-docker-php

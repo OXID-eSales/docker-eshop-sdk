@@ -58,3 +58,11 @@ addbasicservices:
 	@make file=services/php.yml addservice
 	@make file=services/mysql.yml addservice
 	@echo "php, apache and mysql related services added\n";
+
+cleanup:
+	@make down
+	@rm -rf source
+	@rm .env docker-compose.yml
+	@rm containers/httpd/project.conf
+	@rm containers/php/custom.ini
+	@rm -rf data/mysql/*
