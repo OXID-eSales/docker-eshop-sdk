@@ -1,7 +1,6 @@
-USERID = `id -u`
-USERNAME = `id -un`
-GROUPID = `id -g`
-GROUPNAME = `id -gn`
+include .env
+
+IMAGE=`docker create eu.gcr.io/oxid-ci/ci-test-shop:$(CI_IMAGE_TAG)`
 
 default: help
 
@@ -21,30 +20,30 @@ help:
 	"
 
 setup:
-	@cat .env.dist | \
-		sed "s/<userId>/$(USERID)/;\
-		     s/<userName>/$(USERNAME)/;\
-		     s/<groupId>/$(GROUPID)/;\
-		     s/<groupName>/$(GROUPNAME)/;\
-		     s/<CI_IMAGE_TAG>/$(CI_IMAGE_TAG)/"\
-		> .env
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini
 	@cp -n docker-compose.yml.dist docker-compose.yml
 	@echo "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m"
 
-config:
-	docker-compose exec php sed -i "s#dbHost = '127.0.0.1'#dbHost = 'mysql'#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#dbName = 'oxid'#dbName = 'example'#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#dbPwd  = 'oxid'#dbPwd  = 'root'#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#http://core-ci.oxid-esales.com/#http://localhost.local/#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#http://core-ci-private.oxid-esales.com/#http://localhost.local/#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#/var/www/oxideshop/source#/var/www/oxideshop_template/source#g;" /var/www/oxideshop_template/source/config.inc.php \
-    && docker-compose exec php sed -i "s#/var/www/oxideshop/source/tmp#/var/www/oxideshop_template/source/tmp#g;" /var/www/oxideshop_template/source/config.inc.php
+cleanup:
+	@sudo rm -r ./source/* ./source/.*
 
-example:
-	@make addbasicservices
-	@./recipes/default/example/run.sh
+files:
+	@docker cp $(IMAGE):/var/www/oxideshop_template/. ./source/
+	@docker rm -v $(IMAGE)
+
+config:
+	perl -pi\
+	  -e "s#dbHost = '127.0.0.1'#dbHost = 'mysql'#g;"\
+	  -e "s#dbName = 'oxid'#dbName = 'example'#g;"\
+	  -e "s#dbPwd  = 'oxid'#dbPwd  = 'root'#g;"\
+	  -e "s#http://core-ci.oxid-esales.com/#http://localhost.local/#g;"\
+	  -e "s#https://core-ci.oxid-esales.com/#http://localhost.local/#g;"\
+	  -e "s#http://core-ci-private.oxid-esales.com/#http://localhost.local/#g;"\
+	  -e "s#https://core-ci-private.oxid-esales.com/#http://localhost.local/#g;"\
+	  -e "s#/var/www/oxideshop/source#/var/www/source/#g;"\
+	  -e "s#/var/www/oxideshop/source/tmp#/var/www/source/tmp/#g;"\
+	  source/source/config.inc.php
 
 up:
 	docker-compose up --build -d

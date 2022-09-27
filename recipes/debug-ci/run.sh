@@ -1,12 +1,30 @@
 #!/bin/bash
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
+USERID=$(id -u)
+USERNAME=$(id -un)
+GROUPID=$(id -g)
+GROUPNAME=$(id -gn)
 
 cd $SCRIPT_PATH/../../ || exit
 
-# Read user input and set the
+# Read user input and write .env file
 read -p "Enter build hash: " CI_IMAGE_TAG
 export CI_IMAGE_TAG
+
+cat .env.dist | \
+		sed "s/<userId>/${USERID}/;\
+		     s/<userName>/${USERNAME}/;\
+		     s/<groupId>/${GROUPID}/;\
+		     s/<groupName>/${GROUPNAME}/;\
+		     s/<CI_IMAGE_TAG>/${CI_IMAGE_TAG}/"\
+		> .env
+
+# Cleanup source
+make cleanup
+
+# Copy files from CI image
+make files
 
 # Prepare services configuration
 make setup
@@ -15,7 +33,7 @@ make file=services/selenium-chrome.yml addservice
 
 # Configure containers
 perl -pi\
-  -e 's#/var/www/#/var/www/oxideshop_template/source/#g;'\
+  -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
 
 perl -pi\

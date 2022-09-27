@@ -10,5 +10,5 @@
       - "apache:localhost.local"
       - "apache:oxideshop.local"
     volumes:
-      - ./source:/var/www/oxideshop_template
+      - ./source:/var/www
       - /dev/shm:/dev/shm
