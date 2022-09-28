@@ -47,7 +47,7 @@ make up
 # Configure shop
 make config
 
-sleep 2
+sleep 5
 
 # Reset shop
 make reset-shop
