@@ -31,6 +31,10 @@ cleanup:
 files:
 	@docker cp $(IMAGE):/var/www/oxideshop_template/. ./source/
 	@docker rm -v $(IMAGE)
+	@if [ ! -f '/var/www/oxideshop/test_config.yml' ]; then cp ./source/vendor/oxid-esales/testing-library/test_config.yml.dist ./source/test_config.yml; fi
+	@if [ -d '/var/www/oxideshop/vendor/oxid-esales/tests-deprecated-ce/Fixtures' ]; then cp -r ./source/vendor/oxid-esales/tests-deprecated-ce/Fixtures ./source/tests/Fixtures; fi
+	@if [ -d '/var/www/oxideshop/vendor/oxid-esales/tests-deprecated-pe/Fixtures' ]; then cp -r ./source/vendor/oxid-esales/tests-deprecated-pe/Fixtures ./source/tests/Fixtures; fi
+	@if [ -d '/var/www/oxideshop/vendor/oxid-esales/tests-deprecated-ee/Fixtures' ]; then cp -r ./source/vendor/oxid-esales/tests-deprecated-ee/Fixtures ./source/tests/Fixtures; fi
 
 config:
 	perl -pi\
