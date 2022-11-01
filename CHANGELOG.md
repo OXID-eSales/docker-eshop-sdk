@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - PHP container is now based on oxidesales/oxideshop-docker-php
 - Renamed directory from "php-fpm" to "php"
 - Extended description
+- Do not cache local .user.ini values
 
 ### Removed
 - SPX is not installed by default anymore
