@@ -1,4 +1,5 @@
   selenium:
+    platform: linux/x86_64
     image: 'selenium/standalone-chrome-debug:3.141.59'
     restart: always
     shm_size: 500M

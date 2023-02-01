@@ -1,4 +1,5 @@
   seleniumfirefox:
+    platform: linux/x86_64
     image: 'oxidesales/oxideshop-docker-selenium:S2FF31'
     restart: always
     shm_size: 500M
