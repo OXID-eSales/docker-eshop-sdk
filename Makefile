@@ -45,6 +45,9 @@ down:
 php:
 	docker-compose exec php bash
 
+generate-docs:
+	docker-compose run sphinx sphinx-build /home/$(USERNAME)/docs /home/$(USERNAME)/docs/build
+
 node:
 	docker-compose run --rm node bash
 

@@ -1,0 +1,5 @@
+sphinx:
+  image: oxidesales/oxideshop-docker-sphinx
+  volumes:
+    - ./source:/home/${HOST_USER_NAME}/docs
+  user: ${HOST_USER_ID}:${HOST_GROUP_ID}
