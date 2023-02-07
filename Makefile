@@ -62,6 +62,10 @@ addbasicservices:
 	@make file=services/mysql.yml addservice
 	@echo "php, apache and mysql related services added\n";
 
+addsphinxservice:
+	@echo "DOC_PATH=$(path)" >> .env
+	@make file=services/sphinx.yml addservice
+
 cleanup:
 	@make down
 	@rm -rf source
