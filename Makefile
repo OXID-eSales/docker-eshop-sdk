@@ -63,7 +63,7 @@ addbasicservices:
 	@echo "php, apache and mysql related services added\n";
 
 addsphinxservice:
-	@echo "DOC_PATH=$(path)" >> .env
+	@echo "DOC_PATH=$(docpath)" >> .env
 	@make file=services/sphinx.yml addservice
 
 cleanup:
