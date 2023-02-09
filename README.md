@@ -107,6 +107,22 @@ docker-compose run node npm install bootstrap
 make node
 ```
 
+## Using sphinx for documentation generation
+
+In case you want to generate documentation you should run the following commands:
+
+```
+make addsphinxservice
+```
+
+Don't forget to update ``DOC_PATH`` env variable in ``.env`` file. ``DOC_PATH`` should contain the host path in which the documentation is going to be generated.
+
+```
+make generate-docs
+```
+
+If the image does not exist you need to be logged in docker (you can find the credentials in our keepass) in which case you will be asked for username and password.
+
 ## Configurations
 
 ### Apache
