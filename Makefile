@@ -74,3 +74,4 @@ cleanup:
 	@rm containers/httpd/project.conf
 	@rm containers/php/custom.ini
 	@rm -rf data/mysql/*
+	@rm -rf data/composer/cache
