@@ -19,6 +19,7 @@
     depends_on:
       - mailhog
       - apache
+      - mysql
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
