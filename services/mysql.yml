@@ -7,7 +7,7 @@
       MYSQL_DATABASE: example
       MYSQL_ROOT_PASSWORD: root
     healthcheck:
-      test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
+      test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
     volumes:
       - ./data/mysql:/var/lib/mysql
     ports:
