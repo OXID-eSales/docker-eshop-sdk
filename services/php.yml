@@ -21,7 +21,7 @@
         condition: service_started
       apache:
         condition: service_started
-      db:
+      mysql:
         condition: service_healthy
     extra_hosts:
       - "host.docker.internal:host-gateway"
