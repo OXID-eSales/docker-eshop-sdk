@@ -62,6 +62,12 @@ addbasicservices:
 	@make file=services/mysql.yml addservice
 	@echo "php, apache and mysql related services added\n";
 
+addciservices:
+	@make file=services/apache.yml addservice
+	@make file=services/php-ci.yml addservice
+	@make file=services/mysql-ci.yml addservice
+	@echo "php, apache and mysql CI services added\n";
+
 addsphinxservice:
 	@echo "\nDOC_PATH=$(docpath)" >> .env
 	@make file=services/sphinx.yml addservice
