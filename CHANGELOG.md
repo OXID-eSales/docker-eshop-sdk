@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Expose mysql port 3306 to access mysql from outside the docker network
+- Added deprecated xdebug 2 configuration for php 7.4
 
 ## [v4.0.0] - 2022-01-11
 
