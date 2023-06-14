@@ -2,6 +2,8 @@
     platform: linux/x86_64
     build:
       context: containers/nginx
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
     restart: always
     ports:
       - 80:80
