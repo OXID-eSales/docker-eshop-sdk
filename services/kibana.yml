@@ -1,0 +1,4 @@
+  kibana:
+    image: kibana:${KIBANA_VERSION}
+    ports:
+      - 5601:5601

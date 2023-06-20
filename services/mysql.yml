@@ -12,13 +12,3 @@
       - ./data/mysql:/var/lib/mysql
     ports:
       - 3306:3306 # to access mysql with local client
-
-  adminer:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8080:8080
-    depends_on:
-      - mysql
