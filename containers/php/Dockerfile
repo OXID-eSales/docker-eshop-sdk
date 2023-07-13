@@ -16,7 +16,7 @@ RUN printf "host mailhog\nport 1025" >> /etc/msmtprc
 RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
     useradd -m -d /home/$HOST_USER_NAME -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID $HOST_USER_NAME || true && \
     echo "$HOST_USER_NAME  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    chown -R $HOST_USER_NAME.$HOST_GROUP_NAME /var/www/
+    chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /var/www/
 
 RUN mkdir /home/$HOST_USER_NAME/.ssh && \
     ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
