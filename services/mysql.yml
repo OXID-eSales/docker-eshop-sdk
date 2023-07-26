@@ -8,17 +8,9 @@
       MYSQL_ROOT_PASSWORD: root
     healthcheck:
       test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
+      interval: 1s
+      retries: 30
     volumes:
       - ./data/mysql:/var/lib/mysql
     ports:
       - 3306:3306 # to access mysql with local client
-
-  adminer:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8080:8080
-    depends_on:
-      - mysql

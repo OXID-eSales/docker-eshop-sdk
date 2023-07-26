@@ -1,7 +1,6 @@
   nginx:
     platform: linux/x86_64
-    build:
-      context: containers/nginx
+    image: oxidesales/oxideshop-docker-nginx:${NGINX_VERSION}
     restart: always
     ports:
       - 80:80
