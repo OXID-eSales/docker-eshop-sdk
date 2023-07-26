@@ -107,21 +107,22 @@ docker-compose run node npm install bootstrap
 make node
 ```
 
-## Using sphinx for documentation generation
+## Using Sphinx Container for Documentation Generation
 
-In case you want to generate documentation you should run the following commands:
+To generate documentation from documentation repositories locally, we have a preconfigured Sphinx container that can be utilized.
 
-```
-make addsphinxservice
-```
-
-Don't forget to update ``DOC_PATH`` env variable in ``.env`` file. ``DOC_PATH`` should contain the host path in which the documentation is going to be generated.
+To get started, ensure you import our Sphinx container service file using the following command: `make addsphinxservice`. Here's an example of how to use it:
 
 ```
-make generate-docs
+# Clone shop developer documentation to source directory
+git clone https://github.com/OXID-eSales/developer_documentation source/docs
+
+# Add Sphinx container
+make docpath=./source/docs addsphinxservice
 ```
 
-If the image does not exist you need to be logged in docker (you can find the credentials in our keepass) in which case you will be asked for username and password.
+To regenerate the documentation, simply execute the command `make generate-docs`. After doing this, you'll find the generated documentation in the `source/docs/build directory`.
+
 
 ## Configurations
 
