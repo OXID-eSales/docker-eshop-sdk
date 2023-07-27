@@ -37,7 +37,7 @@ example:
 	@./recipes/default/example/run.sh
 
 up:
-	docker compose up --build -d --wait
+	docker compose up --build -d
 
 down:
 	docker compose down --remove-orphans
