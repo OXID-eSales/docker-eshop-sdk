@@ -7,5 +7,5 @@
     depends_on:
       - apache
     volumes:
-      - ./source/source/modules/oe/nginx/ServerConfiguration/ClearCache.lua:/var/www/oxideshop/vendor/oxid-esales/nginx-module/ServerConfiguration/ClearCache.lua
-      - ./source/source/modules/oe/nginx/ServerConfiguration/nginx.conf:/etc/nginx/sites-enabled/default
+      - ./source/source/modules/oe/nginx/ServerConfiguration/ClearCache.lua:/var/www/oxideshop/vendor/oxid-esales/nginx-module/ServerConfiguration/ClearCache.lua:cached
+      - ./source/source/modules/oe/nginx/ServerConfiguration/nginx.conf:/etc/nginx/sites-enabled/default:cached

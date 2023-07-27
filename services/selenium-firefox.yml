@@ -12,4 +12,4 @@
       - "apache:localhost.local"
       - "apache:oxideshop.local"
     volumes:
-      - ./source:/var/www
+      - ./source:/var/www:cached

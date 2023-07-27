@@ -4,7 +4,7 @@
       context: containers/httpd
     working_dir: /var/www/
     volumes:
-      - ./source:/var/www
+      - ./source:/var/www:cached
     ports:
       - 80:80
       - 443:443

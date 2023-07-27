@@ -1,5 +1,5 @@
   sphinx:
     image: oxidesales/oxideshop-docker-sphinx
     volumes:
-      - ${DOC_PATH}:/home/${HOST_USER_NAME}/docs
+      - ${DOC_PATH}:/home/${HOST_USER_NAME}/docs:cached
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
