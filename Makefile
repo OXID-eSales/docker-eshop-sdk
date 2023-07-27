@@ -37,19 +37,19 @@ example:
 	@./recipes/default/example/run.sh
 
 up:
-	docker-compose up --build -d
+	docker compose up --build -d
 
 down:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 php:
-	docker-compose exec php bash
+	docker compose exec php bash
 
 generate-docs:
-	docker-compose run sphinx sphinx-build /home/$(USERNAME)/docs /home/$(USERNAME)/docs/build
+	docker compose run sphinx sphinx-build /home/$(USERNAME)/docs /home/$(USERNAME)/docs/build
 
 node:
-	docker-compose run --rm node bash
+	docker compose run --rm node bash
 
 addservice:
 	@cat $(file) >> docker-compose.yml
