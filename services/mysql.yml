@@ -11,6 +11,6 @@
       interval: 1s
       retries: 30
     volumes:
-      - ./data/mysql:/var/lib/mysql:cached
+      - ./data/mysql:/var/lib/mysql:delegated
     ports:
       - 3306:3306 # to access mysql with local client
