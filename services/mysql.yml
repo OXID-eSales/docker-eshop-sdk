@@ -9,7 +9,7 @@
     healthcheck:
       test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
       interval: 1s
-      retries: 30
+      retries: 60
     volumes:
       - ./data/mysql:/var/lib/mysql:delegated
     ports:
