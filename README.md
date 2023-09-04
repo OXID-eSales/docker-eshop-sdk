@@ -10,14 +10,19 @@ For the start:
 
 * Apache 2.4 (based on original httpd:2.4-alpine container)
   * Some example SSL certificate added and HTTPS supported for https://localhost.local and https://oxideshop.local domains
-* PHP 7.4 / 8.0 / 8.1 fpm (based on oxidesales/oxideshop-docker-php containers which use the official php:x.x-fpm containers as a base) with:
+* PHP 7.4 / 8.0 / 8.1 / 8.2 fpm (based on oxidesales/oxideshop-docker-php containers which use the official php:x.x-fpm containers as a base) with:
   * composer 2
   * xDebug 3 with remote debug and profiler preconfigured
   * error reporting enabled
 * MySQL 5.7 with adminer (original mysql container used)
 * Mailhog preconfigured to catch outgoing emails
-* Npm container preconfigured (based on node:latest)
+
+Additionally, check services directory:
+* Npm container preconfigured, so you can easily regenerate grunt/gulp/other builder assets for modules/themes easier (based on node:latest)
 * Chrome based selenium service available, for running your selenium tests (based on selenium/standalone-chrome-debug)
+* Elasticsearch (also kibana to manage it) containers preconfigured
+* NGINX container preconfigured to be used with our NGINX module
+* Sphinx container which allows you to regenerate and improve our documentations locally much easier
 
 ## Requirements
 
@@ -139,3 +144,9 @@ Custom configuration file for php settings: ``containers/php/custom.ini``.
 
 * Configure the CLI Interpreter
 * Create a Server configuration and set mapping as source:/var/www/
+
+## Issues and questions
+
+Feel free to make improvements for the SDK via Pull requests.
+
+Also, if there are problems with using it, consider creating the Issue in the "Issues" section of this repository on github.
