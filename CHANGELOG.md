@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Expose mysql port 3306 to access mysql from outside the docker network
 - Added deprecated xdebug 2 configuration for php 7.4
+- Add NGINX_SERVER_CONFIG_DIR environment variable to nginx configuration directory
+
+### Changed
+- Default Nginx configuration directory changed to fit development practices
 
 ## [v4.0.0] - 2022-01-11
 
