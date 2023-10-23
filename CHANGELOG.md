@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
+- Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems
 
 ### Fixed

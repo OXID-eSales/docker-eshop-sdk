@@ -59,6 +59,7 @@ addservice:
 addbasicservices:
 	@make file=services/apache.yml addservice
 	@make file=services/php.yml addservice
+	@make file=services/mailpit.yml addservice
 	@make file=services/mysql.yml addservice
 	@printf "php, apache and mysql related services added\n";
 

@@ -15,7 +15,7 @@ For the start:
   * xDebug 3 with remote debug and profiler preconfigured
   * error reporting enabled
 * MySQL 5.7 with adminer (original mysql container used)
-* Mailhog preconfigured to catch outgoing emails
+* Mailpit preconfigured to catch outgoing emails
 
 Additionally, check services directory:
 * Npm container preconfigured, so you can easily regenerate grunt/gulp/other builder assets for modules/themes easier (based on node:latest)
@@ -49,14 +49,14 @@ make example
 Access the website through the http://localhost.local
 * phpinfo shown on index page
 * example with database connection
-* example with email sending and catching it with mailhog
+* example with email sending and catching it with mailpit
     * run the composer install on php container first.
 
 Adminer is available via http://localhost.local:8080
 * Server: mysql
 * Credentials: root/root
 
-Mailhog is available via http://localhost.local:8025/
+Mailpit is available via http://localhost.local:8025/
 
 ## Longer start
 
