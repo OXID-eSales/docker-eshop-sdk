@@ -10,9 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Expose mysql port 3306 to access mysql from outside the docker network
 - Added deprecated xdebug 2 configuration for php 7.4
 - Add NGINX_SERVER_CONFIG_DIR environment variable to nginx configuration directory
+- Add NODE_VERSION environment variable for configuring the node container version
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
+
+### Fixed
+- Ensure having the host user and group as file owner in node container
 
 ## [v4.0.0] - 2022-01-11
 
