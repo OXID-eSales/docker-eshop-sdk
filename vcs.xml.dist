@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/recipes/oxid-esales" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/dev-packages/visualcms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/source/Application/views/admin_twig" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/ddoe/wysiwyg-editor-module" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/apex-theme" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/azure-theme" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/codeception-modules" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/codeception-page-objects" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/developer-tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/gdpr-optin-module" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-composer-plugin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-db-views-generator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-demodata-installer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-doctrine-migration-wrapper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-ee" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-facts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-ide-helper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-pe" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/oxideshop-unified-namespace-generator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/testing-library" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/tests-deprecated-ce" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/tests-deprecated-ee" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/tests-deprecated-pe" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/twig-admin-theme" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/twig-component" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/twig-component-ee" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-esales/twig-component-pe" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/vendor/oxid-professional-services/usercentrics" vcs="Git" />
+  </component>
+</project>

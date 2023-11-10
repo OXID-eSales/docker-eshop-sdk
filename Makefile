@@ -74,3 +74,22 @@ cleanup:
 	@rm containers/php/custom.ini
 	@rm -rf data/mysql/*
 	@rm -rf data/composer/cache
+
+codecept:
+	@docker-compose run -T \
+            -e SELENIUM_SERVER_HOST=selenium \
+            -e BROWSER_NAME=chrome \
+            -e THEME_ID=apex \
+            php vendor/bin/codecept run acceptance,acceptanceAdmin \
+              -c tests/codeception.yml \
+              --ext DotReporter \
+              -x flow_theme -x flow-theme
+
+alltests:
+		@docker-compose run -T \
+ 		php vendor/bin/phpunit  -c phpunit.xml\
+ 		--bootstrap tests/bootstrap.php tests/
+
+phpstorm:
+	@./unexclude-oxid.sh .idea/$$(basename $(CURDIR)).iml
+	@cp vcs.xml.dist .idea/vcs.xml
