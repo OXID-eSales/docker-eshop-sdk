@@ -112,6 +112,30 @@ docker-compose run node npm install bootstrap
 make node
 ```
 
+### npm Install
+Assuiming you are already inside node container. You should run below command to install project dependencies.
+```
+npm install
+```
+
+### Run Grunt
+
+Assuming that the Grunt has been installed and that the project has already been configured with a package.json then you should follow below steps after entering node container.
+ 1. Change to the project's destination directory.
+ 2. Install project dependencies with `npm install`
+ 3. Run Grunt with command `npm run grunt`
+
+### Further Troubleshooting
+When running the `npm install` command to install your project’s dependencies, the install process may hang. At that time installation hangs without any output.
+To resolve such issue run below-mentioned commands.
+```
+npm config rm proxy
+npm config rm https-proxy
+npm config set registry https://registry.npmjs.org/
+npm install
+```
+
+
 ## Using Sphinx Container for Documentation Generation
 
 To generate documentation from documentation repositories locally, we have a preconfigured Sphinx container that can be utilized.
