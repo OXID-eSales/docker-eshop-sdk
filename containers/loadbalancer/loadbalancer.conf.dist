@@ -1,0 +1,17 @@
+
+server {
+    listen 80;
+    # listen 443 ssl;
+    server_name localhost.local max_fails=0;
+    
+    location /admin {
+        proxy_pass http://apache:80;
+    }
+    
+    location / {
+        proxy_pass http://frontend;
+    }
+}
+
+upstream frontend {
+<FRONTEND-SERVERS>}
