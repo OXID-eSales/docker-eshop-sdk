@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Ensure having the host user and group as file owner in node container
 - Replace echo with printf to make it work on Fedora
+- Improved the `make cleanup` command to cleanup better on partial file existance
 
 ## [v4.0.0] - 2022-01-11
 

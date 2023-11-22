@@ -30,7 +30,7 @@ setup:
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini
 	@cp -n docker-compose.yml.dist docker-compose.yml
-	@printf "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m"
+	@printf "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m\n"
 
 example:
 	@make addbasicservices
@@ -67,10 +67,11 @@ addsphinxservice:
 	@make file=services/sphinx.yml addservice
 
 cleanup:
-	@make down
-	@rm -rf source
-	@rm .env docker-compose.yml
-	@rm containers/httpd/project.conf
-	@rm containers/php/custom.ini
-	@rm -rf data/mysql/*
-	@rm -rf data/composer/cache
+	-make down
+	-[ -d "source" ] && rm -rf source
+	-[ -e ".env" ] && rm .env
+	-[ -e "docker-compose.yml" ] && rm docker-compose.yml
+	-[ -e "containers/httpd/project.conf" ] && rm containers/httpd/project.conf
+	-[ -e "containers/php/custom.ini" ] && rm containers/php/custom.ini
+	-[ -d "data/mysql" ] && rm -rf data/mysql/*
+	-[ -d "data/composer/cache" ] && rm -rf data/composer/cache
