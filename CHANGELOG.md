@@ -14,9 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
+- Extended MySQL healthcheck time to give chance for slower systems
 
 ### Fixed
 - Ensure having the host user and group as file owner in node container
+- Replace echo with printf to make it work on Fedora
+- Improved the `make cleanup` command to cleanup better on partial file existance
 
 ## [v4.0.0] - 2022-01-11
 
