@@ -1,5 +1,4 @@
   node:
-    platform: linux/x86_64
     build:
       context: containers/node
       args:
