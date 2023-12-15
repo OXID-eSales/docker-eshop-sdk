@@ -169,6 +169,10 @@ Custom configuration file for php settings: ``containers/php/custom.ini``.
 * Configure the CLI Interpreter
 * Create a Server configuration and set mapping as source:/var/www/
 
+### Multiserver configuration
+
+The SDK contains basic configuration for a load balancing setup using nginx. Information for creating such a setup can be found in the [sdk recipes repository](https://github.com/OXID-eSales/docker-eshop-sdk-recipes?tab=readme-ov-file#multiserver-configuration).
+
 ## Issues and questions
 
 Feel free to make improvements for the SDK via Pull requests.
