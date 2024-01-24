@@ -6,7 +6,7 @@ GROUPNAME = `id -gn`
 default: help
 
 help:
-	@echo "\n\
+	@printf "\n\
 	    \e[1;1;33mSome Help needed?\e[0m\n\n\
 	    \e[1;1;32mmake setup\e[0m - Prefills the .env file with sync required parameters \n\
 	        and prepares all modifiable custom files from dist. Run this \n\
@@ -30,7 +30,7 @@ setup:
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini
 	@cp -n docker-compose.yml.dist docker-compose.yml
-	@echo "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m"
+	@printf "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m\n"
 
 example:
 	@make addbasicservices
@@ -53,24 +53,26 @@ node:
 
 addservice:
 	@cat $(file) >> docker-compose.yml
-	@echo "\n" >> docker-compose.yml
-	@echo "Service file $(file) contents added\n";
+	@printf "\n" >> docker-compose.yml
+	@printf "Service file $(file) contents added\n";
 
 addbasicservices:
 	@make file=services/apache.yml addservice
 	@make file=services/php.yml addservice
+	@make file=services/mailpit.yml addservice
 	@make file=services/mysql.yml addservice
-	@echo "php, apache and mysql related services added\n";
+	@printf "php, apache and mysql related services added\n";
 
 addsphinxservice:
-	@echo "\nDOC_PATH=$(docpath)" >> .env
+	@printf "\nDOC_PATH=$(docpath)" >> .env
 	@make file=services/sphinx.yml addservice
 
 cleanup:
-	@make down
-	@rm -rf source
-	@rm .env docker-compose.yml
-	@rm containers/httpd/project.conf
-	@rm containers/php/custom.ini
-	@rm -rf data/mysql/*
-	@rm -rf data/composer/cache
+	-make down
+	-[ -d "source" ] && rm -rf source
+	-[ -e ".env" ] && rm .env
+	-[ -e "docker-compose.yml" ] && rm docker-compose.yml
+	-[ -e "containers/httpd/project.conf" ] && rm containers/httpd/project.conf
+	-[ -e "containers/php/custom.ini" ] && rm containers/php/custom.ini
+	-[ -d "data/mysql" ] && rm -rf data/mysql/*
+	-[ -d "data/composer/cache" ] && rm -rf data/composer/cache
