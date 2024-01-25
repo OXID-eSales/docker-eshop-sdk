@@ -10,14 +10,19 @@ For the start:
 
 * Apache 2.4 (based on original httpd:2.4-alpine container)
   * Some example SSL certificate added and HTTPS supported for https://localhost.local and https://oxideshop.local domains
-* PHP 7.4 / 8.0 / 8.1 fpm (based on oxidesales/oxideshop-docker-php containers which use the official php:x.x-fpm containers as a base) with:
+* PHP 7.4 / 8.0 / 8.1 / 8.2 fpm (based on oxidesales/oxideshop-docker-php containers which use the official php:x.x-fpm containers as a base) with:
   * composer 2
   * xDebug 3 with remote debug and profiler preconfigured
   * error reporting enabled
 * MySQL 5.7 with adminer (original mysql container used)
-* Mailhog preconfigured to catch outgoing emails
-* Npm container preconfigured (based on node:latest)
+* Mailpit preconfigured to catch outgoing emails
+
+Additionally, check services directory:
+* Npm container preconfigured, so you can easily regenerate grunt/gulp/other builder assets for modules/themes easier (based on node:latest)
 * Chrome based selenium service available, for running your selenium tests (based on selenium/standalone-chrome-debug)
+* Elasticsearch (also kibana to manage it) containers preconfigured
+* NGINX container preconfigured to be used with our NGINX module
+* Sphinx container which allows you to regenerate and improve our documentations locally much easier
 
 ## Requirements
 
@@ -44,14 +49,14 @@ make example
 Access the website through the http://localhost.local
 * phpinfo shown on index page
 * example with database connection
-* example with email sending and catching it with mailhog
+* example with email sending and catching it with mailpit
     * run the composer install on php container first.
 
 Adminer is available via http://localhost.local:8080
 * Server: mysql
 * Credentials: root/root
 
-Mailhog is available via http://localhost.local:8025/
+Mailpit is available via http://localhost.local:8025/
 
 ## Longer start
 
@@ -107,6 +112,30 @@ docker-compose run node npm install bootstrap
 make node
 ```
 
+### npm Install
+Assuiming you are already inside node container. You should run below command to install project dependencies.
+```
+npm install
+```
+
+### Run Grunt
+
+Assuming that the Grunt has been installed and that the project has already been configured with a package.json then you should follow below steps after entering node container.
+ 1. Change to the project's destination directory.
+ 2. Install project dependencies with `npm install`
+ 3. Run Grunt with command `npm run grunt`
+
+### Further Troubleshooting
+When running the `npm install` command to install your project’s dependencies, the install process may hang. At that time installation hangs without any output.
+To resolve such issue run below-mentioned commands.
+```
+npm config rm proxy
+npm config rm https-proxy
+npm config set registry https://registry.npmjs.org/
+npm install
+```
+
+
 ## Using Sphinx Container for Documentation Generation
 
 To generate documentation from documentation repositories locally, we have a preconfigured Sphinx container that can be utilized.
@@ -139,3 +168,13 @@ Custom configuration file for php settings: ``containers/php/custom.ini``.
 
 * Configure the CLI Interpreter
 * Create a Server configuration and set mapping as source:/var/www/
+
+### Multiserver configuration
+
+The SDK contains basic configuration for a load balancing setup using nginx. Information for creating such a setup can be found in the [sdk recipes repository](https://github.com/OXID-eSales/docker-eshop-sdk-recipes?tab=readme-ov-file#multiserver-configuration).
+
+## Issues and questions
+
+Feel free to make improvements for the SDK via Pull requests.
+
+Also, if there are problems with using it, consider creating the Issue in the "Issues" section of this repository on github.

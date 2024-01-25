@@ -9,7 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Expose mysql port 3306 to access mysql from outside the docker network
 - Added deprecated xdebug 2 configuration for php 7.4
+- Add NGINX_SERVER_CONFIG_DIR environment variable to nginx configuration directory
+- Add NODE_VERSION environment variable for configuring the node container version
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
+
+### Changed
+- Default Nginx configuration directory changed to fit development practices
+- Replace Mailhog with Mailpit service
+- Extended MySQL healthcheck time to give chance for slower systems
+
+### Fixed
+- Ensure having the host user and group as file owner in node container
+- Replace echo with printf to make it work on Fedora
+- Improved the `make cleanup` command to cleanup better on partial file existance
 
 ## [v4.0.0] - 2022-01-11
 
