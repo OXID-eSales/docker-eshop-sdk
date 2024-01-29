@@ -1,0 +1,13 @@
+mode: 'usage'
+source: './src/source/Internal'
+filePattern: '*.php'
+formatter: 'PhpDA\Writer\Strategy\PackageLevel0DependencyReporter'
+target: './PACKAGE_LVL_0.svg'
+visitor:
+  - PhpDA\Parser\Visitor\TagCollector
+  - PhpDA\Parser\Visitor\SuperglobalCollector
+visitorOptions:
+  PhpDA\Parser\Visitor\Required\DeclaredNamespaceCollector: {minDepth: 4, sliceLength: 4}
+  PhpDA\Parser\Visitor\Required\MetaNamespaceCollector: {minDepth: 4, sliceLength: 4}
+  PhpDA\Parser\Visitor\Required\UsedNamespaceCollector: {minDepth: 4, sliceLength: 4}
+  PhpDA\Parser\Visitor\TagCollector: {minDepth: 4, sliceLength: 4}

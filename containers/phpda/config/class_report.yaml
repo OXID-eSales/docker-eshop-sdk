@@ -1,0 +1,9 @@
+mode: 'usage'
+source: './src/source/Internal'
+filePattern: '*.php'
+ignore: 'tests'
+formatter: 'PhpDA\Writer\Strategy\ClassDependencyReporter'
+target: './CLASS.svg'
+visitor:
+  - PhpDA\Parser\Visitor\TagCollector
+  - PhpDA\Parser\Visitor\SuperglobalCollector
