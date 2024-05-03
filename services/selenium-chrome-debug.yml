@@ -1,0 +1,20 @@
+## deprecated, only use if necessary (e.g. B2B)
+  selenium:
+    platform: linux/x86_64
+    image: 'selenium/standalone-chrome-debug:3.141.59'
+    restart: always
+    shm_size: 500M
+    depends_on:
+      - php
+    healthcheck:
+      test: /opt/bin/check-grid.sh
+      interval: 1s
+      retries: 60
+    ports:
+      - 4444:4444
+      - 5900:5900
+    links:
+      - "apache:localhost.local"
+      - "apache:oxideshop.local"
+    volumes:
+      - ./source:/var/www:cached
