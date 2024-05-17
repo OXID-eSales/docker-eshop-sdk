@@ -1,0 +1,11 @@
+  varnish:
+    platform: linux/x86_64
+    image: varnish:7.5
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - apache
+    volumes:
+      - ${VARNISH_CONFIG_DIR}/default.vcl:/usr/local/etc/varnish/default.vcl
+      - ${VARNISH_CONFIG_DIR}/servers_conf.vcl.dist:/usr/local/etc/varnish/servers_conf.vcl
