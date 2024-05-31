@@ -3,3 +3,5 @@ error_reporting = E_ALL
 error_log = /var/sync/logs/error_log.txt
 log_errors = On
 user_ini.cache_ttl = 0
+
+zend.exception_string_param_max_len=1000000
