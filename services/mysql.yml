@@ -1,6 +1,6 @@
   mysql:
     platform: linux/amd64
-    image: oxideshop-docker-database:${MYSQL_VERSION}-debian
+    image: oxidesales/oxideshop-docker-database:${MYSQL_VERSION}-debian
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
     restart: always
