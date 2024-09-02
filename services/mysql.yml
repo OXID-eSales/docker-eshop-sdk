@@ -10,7 +10,7 @@
       MARIADB_ROOT_PASSWORD: root
     healthcheck:
       test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
-      start-period: 30s
+      start_period: 30s
       interval: 2s
       retries: 120
     restart: always
