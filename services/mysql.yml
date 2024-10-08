@@ -4,7 +4,6 @@
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
     environment:
-      MYSQL_DATABASE: example
       MYSQL_ROOT_PASSWORD: root
       MARIADB_DATABASE: example
     healthcheck:
