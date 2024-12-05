@@ -16,8 +16,8 @@ DocumentRoot "/var/www/"
         Require all granted
     </Directory>
 
-    SSLCertificateFile "/usr/local/apache2/conf/server.crt"
-    SSLCertificateKeyFile "/usr/local/apache2/conf/server.key"
+    SSLCertificateFile "/usr/local/apache2/conf/rootCA.pem"
+    SSLCertificateKeyFile "/usr/local/apache2/conf/rootCA-key.pem"
     Protocols h2 http/1.1
 
 </VirtualHost>
