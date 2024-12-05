@@ -35,7 +35,7 @@ generate-certificates: setup-mkcert
 	@echo "=============================="
 
 # Default value for enabling certificate generation
-ENABLE_CERTS ?= true
+ENABLE_CERTS ?= false
 
 setup:
 	@cat .env.dist | \
