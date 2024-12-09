@@ -14,28 +14,11 @@ help:
 	    \e[1;1;32mmake addbasicservices\e[0m - Adds php, apache and mysql services \n\
 	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\n\
 	    \e[1;1;32mmake up\e[0m - Start all configured containers (have you run setup command already?)!\n\
-	        \e[1;1;32mUse with ENABLE_CERTS=true|false\e[0m to control SSL certificate generation.\n\
-	        Defaults to \e[1;1;32mtrue\e[0m. Example:\n\
-	        \e[1;1;32mmake up ENABLE_CERTS=true\e[0m\n\n\
 	    \e[1;1;32mmake down\e[0m - Stop all configured containers\n\n\
 	    \e[1;1;32mmake example\e[0m - Setup basic services + Runs example recipe\n\n\
 	    \e[1;1;32mmake php\e[0m - Connect to php container shell\n\
 	    \e[1;1;32mmake node\e[0m - Connect to node container shell\n\
 	"
-
-setup-mkcert:
-	@bash scripts/setup-mkcert.sh
-
-generate-certificates: setup-mkcert
-	@echo "=============================="
-	@echo "Generating SSL certificates using mkcert..."
-	@mkdir -p containers/httpd/certs
-	@mkcert -key-file containers/httpd/certs/server.key -cert-file containers/httpd/certs/server.crt localhost.local localhost 127.0.0.1
-	@echo "Certificates generated and stored in containers/httpd/certs."
-	@echo "=============================="
-
-# Default value for enabling certificate generation
-ENABLE_CERTS ?= false
 
 setup:
 	@cat .env.dist | \
@@ -47,28 +30,13 @@ setup:
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini
 	@cp -n docker-compose.yml.dist docker-compose.yml
-ifeq ($(ENABLE_CERTS), true)
-	@make generate-certificates
-else
-	@echo "Skipping certificate generation and trust setup as ENABLE_CERTS=false."
-endif
-	@printf "Setup done! Add basic services with \e[1;1;32mmake addbasicservices\e[0m and start everything \e[1;1;32mmake up\e[0m\n"
 
 example:
 	@make addbasicservices
 	@./recipes/default/example/run.sh
 
 up:
-	@printf "Starting containers...\n"
-ifeq ($(ENABLE_CERTS), true)
-	@echo "SSL certificate generation enabled."
-	@make generate-certificates
-else
-	@echo "Skipping SSL certificate generation (ENABLE_CERTS=false)."
-endif
 	docker compose up --build -d
-	@printf "Containers are up and running!\n"
-
 
 down:
 	docker compose down --remove-orphans

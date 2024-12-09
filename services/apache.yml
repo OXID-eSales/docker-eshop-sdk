@@ -5,8 +5,6 @@
     working_dir: /var/www/
     volumes:
       - ./source:/var/www:cached
-      - ./containers/httpd/certs/server.crt:/usr/local/apache2/conf/rootCA.pem
-      - ./containers/httpd/certs/server.key:/usr/local/apache2/conf/rootCA-key.pem
     ports:
       - 80:80
       - 443:443
