@@ -47,13 +47,13 @@ Afterwards we can generate the *Server SSL-Certificate* by passing the used conf
 ```shell
 openssl ca -config openssl-ca.conf -policy signing_policy -extensions signing_req -out server.crt -infiles server.csr
 ```
-
+---
 
 **The second one** creates the *Server SSL-Certificate* without any database or serial file. Without a database or
 serial file, you will need to manage certificate tracking and revocation manually.
 
 ```shell
-openssl x509 -req -in server.csr -CA oxid_esales_localhost_ca.crt -CAkey ca.key -out server.crt -days 365 -sha256 -set_serial 01
+openssl x509 -req -in server.csr -CA oxid_esales_localhost_ca.crt -CAkey ca.key -out server.crt -days 365 -sha256 -set_serial 01 -extfile openssl-server.conf -extensions server_req_extensions
 ```
 
 **The second method without a database file was used for our SSL-Certificate which is already existing in our SDK, because
@@ -67,9 +67,9 @@ only a single certificate is necessary for development purpose.**
 1. **Keychain:**
     - Open the Terminal and execute the following command:
       ```bash
-      sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <certificate.pem>
+      sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <oxid_esales_localhost_ca.crt>
       ```
-    - Replace `<certificate.pem>` with the path to your certificate.
+    - Replace `<oxid_esales_localhost_ca.crt>` with the path to your certificate.
 
 2. **Manual Addition:**
     - Open the **Keychain Access** application.
@@ -82,7 +82,7 @@ only a single certificate is necessary for development purpose.**
 1. **System-wide CA Store (Debian/Ubuntu):**
     - Copy the certificate to the CA directory:
       ```bash
-      sudo cp <certificate.pem> /usr/local/share/ca-certificates/
+      sudo cp <oxid_esales_localhost_ca.crt> /usr/local/share/ca-certificates/
       ```
     - Update the CA store:
       ```bash
@@ -92,7 +92,7 @@ only a single certificate is necessary for development purpose.**
 2. **Red Hat/CentOS:**
     - Copy the certificate:
       ```bash
-      sudo cp <certificate.pem> /etc/pki/ca-trust/source/anchors/
+      sudo cp <oxid_esales_localhost_ca.crt> /etc/pki/ca-trust/source/anchors/
       ```
     - Update the CA store:
       ```bash
