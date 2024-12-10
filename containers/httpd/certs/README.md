@@ -1,67 +1,70 @@
 # SSL-Certificates for HTTPS and HTTP/2 support 
 
-## Generation of certificates
-
-### ATTENTION:
-The following steps are not necessary anymore, as the needed CA-files and the SSL-certificates 
+## ATTENTION:
+The following steps are not necessary anymore, as the needed CA-files and the SSL-certificates
 for the server are already existing in the current directory (`containers/httpd/certs`) of the SDK.
 
-### Create a Certificate Authority (CA)
-Configurations, done in `openssl-ca.conf`, are used to create the *CA-Certificate* (`oxid_esales_localhost_ca.crt`)
-and the *CA-Key* (`ca.key`).
 
-```shell
-openssl req -x509 -config openssl-ca.conf -days 365 -newkey rsa:4096 -sha256 -nodes -out oxid_esales_localhost_ca.crt
-```
+## Generation of certificates:
 
-### Generate the Server Key and Certificate Signing Request (CSR)
-Configurations, done in `openssl-server.conf`, are used to create the *Certificate Signing Request (CSR)* for the server
-(`server.csr`) and the SSL-key (`server.key`).
+**1. Create a Certificate Authority (CA):**
 
-```shell
-openssl req -config openssl-server.conf -newkey rsa:2048 -sha256 -nodes -out server.csr
-```
+   Configurations, done in `openssl-ca.conf`, are used to create the *CA-Certificate* (`oxid_esales_localhost_ca.crt`)
+   and the *CA-Key* (`ca.key`).
 
-The *Certificate Signing Request (CSR)* is used to generate the final SSL-Certificate.
+   ```shell
+   openssl req -x509 -config openssl-ca.conf -days 365 -newkey rsa:4096 -sha256 -nodes -out oxid_esales_localhost_ca.crt
+   ```
 
-### Sign the Server Certificate
-The *CA-Certificate* will be used to sign the previously created *Certificate Signing Request (CSR)* and finally creates
-the SSL-Certificate (`server.crt`) for the server.
+**2. Generate the Server Key and Certificate Signing Request (CSR):**
 
-Therefore we have two possibilities:
+   Configurations, done in `openssl-server.conf`, are used to create the *Certificate Signing Request (CSR)* for the server
+   (`server.csr`) and the SSL-key (`server.key`).
 
-**The first one** creates the SSL-Certificate and the database and serial-files. This is interesting if you might want to
-create multiple SSL-Certificates from the CSR. This solution creates and stores and updates the serial-number
-automatically in a database (`index.txt`) and a serial-file (`serial.txt`).
-To store the serials we need to create database file:
-```shell
-touch index.txt
-```
-and the file with the current serial number:
-```shell
-echo '01' > serial.txt
-```
+   ```shell
+   openssl req -config openssl-server.conf -newkey rsa:2048 -sha256 -nodes -out server.csr
+   ```
 
-Afterwards we can generate the *Server SSL-Certificate* by passing the used config file for this process.
+   The *Certificate Signing Request (CSR)* is used to generate the final SSL-Certificate.
 
-```shell
-openssl ca -config openssl-ca.conf -policy signing_policy -extensions signing_req -out server.crt -infiles server.csr
-```
----
+**3. Sign the Server Certificate:**
 
-**The second one** creates the *Server SSL-Certificate* without any database or serial file. Without a database or
-serial file, you will need to manage certificate tracking and revocation manually.
+   The *CA-Certificate* will be used to sign the previously created *Certificate Signing Request (CSR)* and finally creates
+   the SSL-Certificate (`server.crt`) for the server.
 
-```shell
-openssl x509 -req -in server.csr -CA oxid_esales_localhost_ca.crt -CAkey ca.key -out server.crt -days 365 -sha256 -set_serial 01 -extfile openssl-server.conf -extensions server_req_extensions
-```
+   Therefore we have two possibilities:
 
-**The second method without a database file was used for our SSL-Certificate which is already existing in our SDK, because
-only a single certificate is necessary for development purpose.**
+   - **The first one** creates the SSL-Certificate and the database and serial-files. This is interesting if you might want to
+      create multiple SSL-Certificates from the CSR. This solution creates and stores and updates the serial-number
+      automatically in a database (`index.txt`) and a serial-file (`serial.txt`).
+      To store the serials we need to create database file:
+      ```shell
+      touch index.txt
+      ```
+      and the file with the current serial number:
+      ```shell
+      echo '01' > serial.txt
+      ```
 
-## Adding Self-signed CA Certificates
+      Afterwards we can generate the *Server SSL-Certificate* by passing the used config file for this process.
 
-### Adding Certificates to the Local Key Store
+      ```shell
+      openssl ca -config openssl-ca.conf -policy signing_policy -extensions signing_req -out server.crt -infiles server.csr
+      ```
+
+   - **The second one** creates the *Server SSL-Certificate* without any database or serial file. Without a database or
+      serial file, you will need to manage certificate tracking and revocation manually.
+
+      ```shell
+      openssl x509 -req -in server.csr -CA oxid_esales_localhost_ca.crt -CAkey ca.key -out server.crt -days 365 -sha256 -set_serial 01 -extfile openssl-server.conf -extensions server_req_extensions
+      ```
+
+      **The second method without a database file was used for our SSL-Certificate which is already existing in our SDK, because
+      only a single certificate is necessary for development purpose.**
+
+## Adding Self-signed CA Certificates:
+
+### Adding Certificates to the Local Key Store:
 
 #### macOS
 1. **Keychain:**
@@ -112,7 +115,7 @@ only a single certificate is necessary for development purpose.**
 
 ---
 
-### Manually Adding Certificates in Browsers
+### Manually Adding Certificates in Browsers:
 
 #### Firefox
 1. Open Firefox settings:
@@ -123,7 +126,7 @@ only a single certificate is necessary for development purpose.**
 
 ---
 
-### Chrome
+#### Chrome
 1. Open Chrome settings:
     - **Settings → Privacy and Security → Security → Manage certificates** (under **Advanced** settings).
 2. Import the certificate:
@@ -133,7 +136,7 @@ only a single certificate is necessary for development purpose.**
 
 ---
 
-### Safari
+#### Safari
 1. Open Safari settings:
     - Go to **Preferences → Privacy → Manage Website Data** (or **Certificates**, depending on the version).
 2. Import the certificate:
