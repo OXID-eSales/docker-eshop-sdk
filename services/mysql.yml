@@ -4,9 +4,9 @@
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
     environment:
-      MYSQL_DATABASE: example
-      MYSQL_ROOT_PASSWORD: root
-      MARIADB_DATABASE: example
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-example}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-example}
     healthcheck:
       test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
       start_period: 30s
