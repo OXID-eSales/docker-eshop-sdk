@@ -2,7 +2,7 @@
     image: cypress/included:latest
     working_dir: /var/www/extensions/telecash/tests/e2e
     volumes:
-      - ./source/extensions/telecash:/var/www/extensions/telecash:cached
+      - ./source:/var/www:cached
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - CYPRESS_baseUrl=https://oxidshop.local
