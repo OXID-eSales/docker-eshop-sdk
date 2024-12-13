@@ -1,17 +1,17 @@
-cypress:
-  image: cypress/included:latest
-  working_dir: /var/www/extensions/telecash/tests/e2e
-  volumes:
-    - ./source/extensions/telecash:/var/www/extensions/telecash:cached
-    - /tmp/.X11-unix:/tmp/.X11-unix
-  environment:
-    - CYPRESS_baseUrl=https://oxidshop.local
-  ports:
-    - "5900:5900" # VNC port
-  command: cypress open
-  depends_on:
-    apache:
-      condition: service_started
-    php:
-      condition: service_started
-  entrypoint: [ "npx", "cypress", "run", "--config-file", "/var/www/extensions/telecash/tests/e2e/cypress.config.js" ]
+  cypress:
+    image: cypress/included:latest
+    working_dir: /var/www/extensions/telecash/tests/e2e
+    volumes:
+      - ./source/extensions/telecash:/var/www/extensions/telecash:cached
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - CYPRESS_baseUrl=https://oxidshop.local
+    ports:
+      - "5900:5900" # VNC port
+    command: cypress open
+    depends_on:
+      apache:
+        condition: service_started
+      php:
+        condition: service_started
+    entrypoint: [ "npx", "cypress", "run", "--config-file", "/var/www/extensions/telecash/tests/e2e/cypress.config.js" ]
