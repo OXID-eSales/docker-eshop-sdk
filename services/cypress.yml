@@ -6,7 +6,6 @@ cypress:
     - /tmp/.X11-unix:/tmp/.X11-unix
   environment:
     - CYPRESS_baseUrl=https://oxidshop.local
-    - MODULE_CYPRESS_CONFIG_PATH=/var/www/extensions/telecash/tests/e2e/cypress.config.js
   ports:
     - "5900:5900" # VNC port
   command: cypress open
@@ -15,4 +14,4 @@ cypress:
       condition: service_started
     php:
       condition: service_started
-  entrypoint: [ "npx", "cypress", "run", "--config-file", "$MODULE_CYPRESS_CONFIG_PATH" ]
+  entrypoint: [ "npx", "cypress", "run", "--config-file", "/var/www/extensions/telecash/tests/e2e/cypress.config.js" ]
