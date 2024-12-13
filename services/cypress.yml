@@ -14,4 +14,4 @@
         condition: service_started
       php:
         condition: service_started
-    entrypoint: [ "npx", "cypress", "run", "--config-file", "/var/www/extensions/telecash/tests/e2e/cypress.config.js" ]
+    entrypoint: [ "npx", "cypress", "run", "--config-file", "/var/www/vendor/oxid-solution-catalysts/telecash-module/tests/e2e/cypress.config.js" ]
