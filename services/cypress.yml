@@ -1,6 +1,6 @@
   cypress:
     image: cypress/included:latest
-    working_dir: /var/www/extensions/telecash/tests/e2e
+    working_dir: ${CYPRESS_CONFIG}
     volumes:
       - ./source:/var/www:cached
       - /tmp/.X11-unix:/tmp/.X11-unix
