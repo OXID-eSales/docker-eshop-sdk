@@ -15,4 +15,4 @@
     volumes:
       - ./data/mysql:/var/lib/mysql:delegated
     ports:
-      - 3306:3306 # to access mysql with local client
+      - "3306:3306"
