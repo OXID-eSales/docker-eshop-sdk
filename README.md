@@ -159,6 +159,9 @@ To regenerate the documentation, simply execute the command `make generate-docs`
 
 Custom configuration file: ``containers/httpd/project.conf``.
 
+### SSL
+To setup SSL for HTTPS or HTTP/2, checkout the README.md in ``containers/https/certs``.
+
 ### PHP
 
 Select PHP version to be used in docker-compose php container configuration.

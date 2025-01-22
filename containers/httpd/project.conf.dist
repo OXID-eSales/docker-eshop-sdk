@@ -19,4 +19,6 @@ DocumentRoot "/var/www/"
 
     SSLCertificateFile "/usr/local/apache2/conf/server.crt"
     SSLCertificateKeyFile "/usr/local/apache2/conf/server.key"
+    Protocols h2 http/1.1
+
 </VirtualHost>
