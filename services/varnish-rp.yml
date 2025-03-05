@@ -2,7 +2,7 @@
     image: ${VARNISH_IMAGE}
     restart: always
     ports:
-      - 80:80
+      - ${EXT_PORT_SHOP:-80}:80
     depends_on:
       - apache
     volumes:
