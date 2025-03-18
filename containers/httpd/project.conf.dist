@@ -9,7 +9,6 @@ DocumentRoot "/var/www/"
     DocumentRoot "/var/www/"
     ServerName localhost.local
     ServerAlias oxideshop.local
-    ServerAlias 127.0.0.1
 
     SSLEngine on
     <Directory "/var/www/">
