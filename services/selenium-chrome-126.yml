@@ -1,6 +1,6 @@
   selenium:
     platform: linux/x86_64
-    image: 'selenium/standalone-chrome:126.0-chromedriver-126.0'
+    image: 'selenium/standalone-chrome:126.0-chromedriver-126.0-20250303'
     restart: always
     shm_size: 500M
     depends_on:
