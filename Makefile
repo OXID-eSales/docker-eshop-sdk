@@ -67,6 +67,7 @@ addsphinxservice:
 	@make file=services/sphinx.yml addservice
 
 cleanup:
+	@read -p "Are you sure you want to clean up everything? Warning! Source directory will be removed! [y/N]" confirm && [ "$$confirm" = "y" ] || exit 1
 	-make down
 	-[ -d "source" ] && rm -rf source
 	-[ -e ".env" ] && rm .env
