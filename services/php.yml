@@ -17,8 +17,7 @@
       - ./data/composer:${HOME}/.composer/:cached
     environment:
       - COMPOSER_AUTH=${COMPOSER_AUTH}
-    env_file:
-      - .env
+    env_file: .env
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     depends_on:
       mailpit:

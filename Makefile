@@ -21,12 +21,6 @@ help:
 	"
 
 setup:
-	@cat .env.dist | \
-		sed "s/<userId>/$(USERID)/;\
-		     s/<userName>/$(USERNAME)/;\
-		     s/<groupId>/$(GROUPID)/;\
-		     s/<groupName>/$(GROUPNAME)/"\
-		> .env
 	@cp -n containers/httpd/project.conf.dist containers/httpd/project.conf
 	@cp -n containers/php/custom.ini.dist containers/php/custom.ini
 	@cp -n docker-compose.yml.dist docker-compose.yml
@@ -69,8 +63,7 @@ addsphinxservice:
 cleanup:
 	@read -p "Are you sure you want to clean up everything? Warning! Source directory will be removed! [y/N]" confirm && [ "$$confirm" = "y" ] || exit 1
 	-make down
-	-[ -d "source" ] && rm -rf source
-	-[ -e ".env" ] && rm .env
+	-[ -d "source/source" ] && rm -rf source/source
 	-[ -e "docker-compose.yml" ] && rm docker-compose.yml
 	-[ -e "containers/httpd/project.conf" ] && rm containers/httpd/project.conf
 	-[ -e "containers/php/custom.ini" ] && rm containers/php/custom.ini
