@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NGINX_SERVER_CONFIG_DIR environment variable to nginx configuration directory
 - Add NODE_VERSION environment variable for configuring the node container version
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
+- Service configuration for MySQL in-memory engine
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
