@@ -16,11 +16,11 @@ COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
 RUN printf "host mailpit\nport 1025" >> /etc/msmtprc
 
 RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
-    useradd -m -d $HOME -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID $HOST_USER_NAME || true && \
+    useradd -m -d /home/$HOST_USER_NAME -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID $HOST_USER_NAME || true && \
     echo "$HOST_USER_NAME  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /var/www/
 
-RUN mkdir $HOME/.ssh && \
-    ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
+RUN mkdir /home/$HOST_USER_NAME/.ssh && \
+    ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
 
 WORKDIR /var/www/
