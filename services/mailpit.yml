@@ -1,5 +1,5 @@
   mailpit:
     image: axllent/mailpit
     ports:
-      - "${EXT_PORT_MAILPIT_SMTP:-1025}:1025" # smtp server
-      - "${EXT_PORT_MAILPIT_WEBUI:-8025}:8025" # web ui
+      - ${PORT_MAILPIT_SMTP}:1025 # smtp server
+      - ${PORT_MAILPIT_WEBUI}:8025 # web ui

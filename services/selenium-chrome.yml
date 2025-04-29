@@ -10,8 +10,8 @@
       interval: 1s
       retries: 60
     ports:
-      - ${EXT_PORT_BROWSER_WEBDRIVER:-4444}:4444
-      - ${EXT_PORT_BROWSER_VNC:-5900}:5900
+      - ${PORT_BROWSER_CHROME_WEBDRIVER}:4444
+      - ${PORT_BROWSER_CHROME_VNC}:5900
     links:
       - "apache:localhost.local"
       - "apache:oxideshop.local"

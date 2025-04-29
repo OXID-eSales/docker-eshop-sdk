@@ -6,8 +6,8 @@
     depends_on:
       - php
     ports:
-      - ${EXT_PORT_BROWSER_2_WEBDRIVER:-4445}:4444
-      - ${EXT_PORT_BROWSER_2_VNC:-5901}:5900
+      - ${PORT_BROWSER_FIREFOX_WEBDRIVER}:4444
+      - ${PORT_BROWSER_FIREFOX_VNC}:5900
     links:
       - "apache:localhost.local"
       - "apache:oxideshop.local"
