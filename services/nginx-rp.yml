@@ -3,7 +3,7 @@
     image: oxidesales/oxideshop-docker-nginx:${NGINX_VERSION}
     restart: always
     ports:
-      - 80:80
+      - ${PORT_SHOP}:80
     depends_on:
       - apache
     volumes:
