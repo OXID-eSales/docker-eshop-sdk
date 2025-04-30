@@ -18,12 +18,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Default Nginx configuration directory changed to fit development practices
 - Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems
+- Extracted the variables with exposed PORTS to the env file, so it can be easier adjusted [PR-34](https://github.com/OXID-eSales/docker-eshop-sdk/pull/34)
 
 ### Fixed
 - Ensure having the host user and group as file owner in node container
 - Replace echo with printf to make it work on Fedora
 - Improved the `make cleanup` command to cleanup better on partial file existance
 - Remove obsolete "version" option from docker-compose.yml.dist file
+- Remove redundant spaces in .env file [PR-33](https://github.com/OXID-eSales/docker-eshop-sdk/pull/33)
 
 ## [v4.0.0] - 2022-01-11
 
