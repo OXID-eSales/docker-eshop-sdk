@@ -21,3 +21,6 @@ DocumentRoot "/var/www/"
     Protocols h2 http/1.1
 
 </VirtualHost>
+
+# For local development with Xdebug, it's convenient to have a longer timeout than the default.
+Timeout 600
