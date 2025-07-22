@@ -7,4 +7,4 @@
       - cluster.name=oxid-cluster
       - discovery.type=single-node
     ports:
-      - 9200:9200
+      - "9200:9200"

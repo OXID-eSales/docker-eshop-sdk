@@ -6,8 +6,8 @@
     depends_on:
       - php
     ports:
-      - 4445:4444
-      - 5901:5900
+      - "4445:4444"
+      - "5901:5900"
     links:
       - "apache:localhost.local"
       - "apache:oxideshop.local"

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NODE_VERSION environment variable for configuring the node container version
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
 - Confirmation question on `cleanup` command to avoid accidental data loss
+- Service configuration for MySQL in-memory engine
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
