@@ -1,0 +1,15 @@
+services:
+  redis:
+    build:
+      context: containers/redis
+    ports:
+      - "6379:6379"
+    depends_on:
+      - php
+
+  php:
+    build: 
+      args:
+        INSTALL_REDIS_EXTENSION: "true"
+    volumes:
+      - ./containers/redis/redis-session.ini:/usr/local/etc/php/conf.d/redis-session.ini
