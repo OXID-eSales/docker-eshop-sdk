@@ -125,7 +125,8 @@ Assuming that the Grunt has been installed and that the project has already been
  2. Install project dependencies with `npm install`
  3. Run Grunt with command `npm run grunt`
 
-### Further Troubleshooting
+## Further Troubleshooting
+
 When running the `npm install` command to install your project’s dependencies, the install process may hang. At that time installation hangs without any output.
 To resolve such issue run below-mentioned commands.
 ```
@@ -134,6 +135,34 @@ npm config rm https-proxy
 npm config set registry https://registry.npmjs.org/
 npm install
 ```
+
+### Node.js/NPM install issues on MacBook M2/M3 (Apple Silicon)
+
+If you run `npm install` and node dependencies do not install (especially with errors related to PhantomJS or other native binaries), this is likely due to architecture differences:
+
+- By default, Docker on MacBook M2/M3 (Apple Silicon) uses the ARM64 architecture (`linux/arm64`).
+- Some older Node.js dependencies (like PhantomJS) only provide prebuilt binaries for x86_64 (`amd64`).
+- As a result, `npm install` may fail or binaries may not work as expected.
+
+**Solution:**
+
+Set the platform for the node container to `linux/amd64` in your `docker-compose.yml` and rebuild the container after the change. This forces Docker to emulate an Intel/amd64 environment, allowing npm to install and use x86_64-only binaries.
+
+**Example for docker-compose.yml:**
+
+```yaml
+services:
+  node:
+    platform: linux/amd64
+    # ...other config...
+```
+Rebuild your Docker containers:
+   ```sh
+   make down
+   make up
+   ```
+
+After this change, re-run `npm install` inside the node container. The installation should now succeed, and binaries like PhantomJS will work as expected.
 
 
 ## Using Sphinx Container for Documentation Generation
