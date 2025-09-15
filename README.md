@@ -146,7 +146,7 @@ If you run `npm install` and node dependencies do not install (especially with e
 
 **Solution:**
 
-Set the platform for the node container to `linux/amd64` in your `docker-compose.yml` when running the container. This forces Docker to emulate an Intel/amd64 environment, allowing npm to install and use x86_64-only binaries.
+Set the platform for the node container to `linux/amd64` in your `docker-compose.yml` and rebuild the container after the change. This forces Docker to emulate an Intel/amd64 environment, allowing npm to install and use x86_64-only binaries.
 
 **Example for docker-compose.yml:**
 
