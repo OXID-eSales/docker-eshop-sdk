@@ -23,6 +23,7 @@ Additionally, check services directory:
 * Elasticsearch (also kibana to manage it) containers preconfigured
 * NGINX container preconfigured to be used with our NGINX module
 * Sphinx container which allows you to regenerate and improve our documentations locally much easier
+* Redis container can be started and php extension will be automatically installed. Check the ``make addredisservice`` command in the Makefile
 
 ## Requirements
 
@@ -135,6 +136,13 @@ npm config set registry https://registry.npmjs.org/
 npm install
 ```
 
+## Using Redis container
+
+In case Redis container is used, its possible to easily connect to the Redis console by using 
+
+```
+docker compose exec redis redis-cli
+```
 
 ## Using Sphinx Container for Documentation Generation
 
