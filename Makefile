@@ -66,6 +66,10 @@ addsphinxservice:
 	@printf "\nDOC_PATH=$(docpath)" >> .env
 	@make file=services/sphinx.yml addservice
 
+addredisservice:
+	@cp services/redis.override.yml docker-compose.override.yml
+	@printf "Redis service added\n";
+
 cleanup:
 	@read -p "Are you sure you want to clean up everything? Warning! Source directory will be removed! [y/N]" confirm && [ "$$confirm" = "y" ] || exit 1
 	-make down
@@ -76,3 +80,4 @@ cleanup:
 	-[ -e "containers/php/custom.ini" ] && rm containers/php/custom.ini
 	-[ -d "data/mysql" ] && rm -rf data/mysql/*
 	-[ -d "data/composer/cache" ] && rm -rf data/composer/cache
+	-[ -e "docker-compose.override.yml" ] && rm docker-compose.override.yml
