@@ -44,6 +44,17 @@ down:
 php:
 	docker compose exec php bash
 
+ .PHONY: test_ports ## Test if ports defined in .env file are available (netcat needed!)
+test_ports:
+	$(if $(shell if [ -f .env ]; then echo '.env exists'; fi), , $(error Please create .env file with make setup))
+	@for port_line in $$(grep ^PORT_ .env) ; \
+	    do port=$$(echo $$port_line | cut -d = -f 2 );\
+	       port_name=$$(echo $$port_line | cut -d = -f 1 );\
+	       if netcat -z localhost $$port ; then \
+	        echo $$port for $$port_name is NOT available ;\
+	       fi \
+	    done
+
 generate-docs:
 	docker compose run --rm sphinx sphinx-build /home/$(USERNAME)/docs /home/$(USERNAME)/docs/build
 
