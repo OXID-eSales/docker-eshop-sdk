@@ -50,7 +50,7 @@ test_ports:
 	@for port_line in $$(grep ^PORT_ .env) ; \
 	    do port=$$(echo $$port_line | cut -d = -f 2 );\
 	       port_name=$$(echo $$port_line | cut -d = -f 1 );\
-	       if netcat -z localhost $$port ; then \
+	       if nc -z localhost $$port ; then \
 	        echo $$port for $$port_name is NOT available ;\
 	       fi \
 	    done

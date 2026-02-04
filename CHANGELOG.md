@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
 - Confirmation question on `cleanup` command to avoid accidental data loss
 - Redis container preconfigured and ready to use if needed
+- Add Makefile command `make test_ports` to check if some of the configured ports are already in use [PR-38](https://github.com/OXID-eSales/docker-eshop-sdk/pull/38)
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
