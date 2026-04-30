@@ -12,7 +12,13 @@
       start_period: 30s
       interval: 2s
       retries: 180
-    restart: always
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     volumes:
       - ./data/mysql:/var/lib/mysql:delegated

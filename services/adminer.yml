@@ -1,6 +1,6 @@
   adminer:
     image: adminer
-    restart: always
+    restart: "no"
     environment:
       ADMINER_DEFAULT_SERVER: mysql
     ports:
