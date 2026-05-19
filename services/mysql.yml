@@ -16,9 +16,7 @@
     deploy:
       resources:
         limits:
-          memory: 2G
-        reservations:
-          memory: 512M
+          memory: ${MYSQL_MEMORY_LIMIT:-2G}
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     volumes:
       - ./data/mysql:/var/lib/mysql:delegated
