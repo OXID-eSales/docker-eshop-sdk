@@ -15,12 +15,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Confirmation question on `cleanup` command to avoid accidental data loss
 - Redis container preconfigured and ready to use if needed
 - Add Makefile command `make test_ports` to check if some of the configured ports are already in use [PR-38](https://github.com/OXID-eSales/docker-eshop-sdk/pull/38)
+- Configurable MySQL memory limit via `MYSQL_MEMORY_LIMIT` (default 2G) to prevent host OOM from runaway MySQL memory usage
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
 - Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems
 - Extracted the variables with exposed PORTS to the env file, so it can be easier adjusted [PR-34](https://github.com/OXID-eSales/docker-eshop-sdk/pull/34)
+- Switched `restart` policy from `always` to `no` on all service containers to avoid containers auto-starting on host reboot; run `make up` to bring services back after a crash
 
 ### Fixed
 - Ensure having the host user and group as file owner in node container

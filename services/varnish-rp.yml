@@ -1,6 +1,6 @@
   varnish:
     image: ${VARNISH_IMAGE}
-    restart: always
+    restart: "no"
     ports:
       - ${PORT_SHOP}:80
     depends_on:
