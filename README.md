@@ -137,10 +137,6 @@ npm config set registry https://registry.npmjs.org/
 npm install
 ```
 
-### Containers do not auto-restart
-
-Services use `restart: "no"`, so a crashed container (e.g. MySQL OOM) stays down — run `make up` again to bring it back.
-
 ### Node.js/NPM install issues on MacBook M2/M3 (Apple Silicon)
 
 If you run `npm install` and node dependencies do not install (especially with errors related to PhantomJS or other native binaries), this is likely due to architecture differences:
