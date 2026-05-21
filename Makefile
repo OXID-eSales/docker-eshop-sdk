@@ -12,12 +12,14 @@ help:
 	        and prepares all modifiable custom files from dist. Run this \n\
 	        once before everything!\n\n\
 	    \e[1;1;32mmake addbasicservices\e[0m - Adds php, apache and mysql services \n\
-	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\n\
+	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\
+	    \e[1;1;32mmake addphpstandaloneservice\e[0m - Add PHP standalone service shell\n\n\
 	    \e[1;1;32mmake up\e[0m - Start all configured containers (have you run setup command already?)!\n\
 	    \e[1;1;32mmake down\e[0m - Stop all configured containers\n\n\
 	    \e[1;1;32mmake example\e[0m - Setup basic services + Runs example recipe\n\n\
 	    \e[1;1;32mmake php\e[0m - Connect to php container shell\n\
-	    \e[1;1;32mmake node\e[0m - Connect to node container shell\n\
+	    \e[1;1;32mmake php-standalone\e[0m - Connect to the standalone PHP container and run any command. Usage: make php-standalone CMD=\"<args>\"\n\
+	    \e[1;1;32mmake node\e[0m - Connect to node container shell\n\n\
 	"
 
 setup:
@@ -61,6 +63,9 @@ generate-docs:
 node:
 	docker compose run --rm node bash
 
+php-standalone:
+	docker compose run --rm --build -T php-standalone $(CMD)
+
 addservice:
 	@cat $(file) >> docker-compose.yml
 	@printf "\n" >> docker-compose.yml
@@ -80,6 +85,12 @@ addsphinxservice:
 addredisservice:
 	@cp services/redis.override.yml docker-compose.override.yml
 	@printf "Redis service added\n";
+
+addphpstandaloneservice:
+	@make file=services/php-standalone.yml addservice
+	@printf "PHP standalone service added\n";
+	@mkdir -p source
+	@printf "source directory created\n";
 
 cleanup:
 	@read -p "Are you sure you want to clean up everything? Warning! Source directory will be removed! [y/N]" confirm && [ "$$confirm" = "y" ] || exit 1
