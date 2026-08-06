@@ -27,7 +27,7 @@ Additionally, check services directory:
 
 ## Requirements
 
-* Docker (https://docs.docker.com/get-docker/)
+* Docker 25.0 or newer (https://docs.docker.com/get-docker/), required for the `start_interval` healthcheck option
 * Docker compose (https://docs.docker.com/compose/install/)
 * ``127.0.0.1 localhost.local`` - in your ``/etc/hosts`` file
 

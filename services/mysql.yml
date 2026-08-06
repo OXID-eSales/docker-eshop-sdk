@@ -9,9 +9,10 @@
       MARIADB_DATABASE: ${MARIADB_DATABASE:-example}
     healthcheck:
       test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$${MYSQL_ROOT_PASSWORD} 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
-      start_period: 30s
-      interval: 2s
-      retries: 180
+      start_period: 300s
+      start_interval: 2s
+      interval: 30s
+      retries: 12
     restart: "no"
     deploy:
       resources:
