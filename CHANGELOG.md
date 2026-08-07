@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Redis container preconfigured and ready to use if needed
 - Add Makefile command `make test_ports` to check if some of the configured ports are already in use [PR-38](https://github.com/OXID-eSales/docker-eshop-sdk/pull/38)
 - Configurable MySQL memory limit via `MYSQL_MEMORY_LIMIT` (default 2G) to prevent host OOM from runaway MySQL memory usage
+- Configurable Xdebug mode via `XDEBUG_MODE` on the php and php-standalone services. The default is unchanged (`debug,profile`); setting `XDEBUG_MODE=off` in `.env` removes the per-function-call overhead, which measured 140ms against 15ms for fib(27) on PHP 8.4
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices

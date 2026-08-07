@@ -209,6 +209,41 @@ Custom configuration file for php settings: ``containers/php/custom.ini``.
 * Configure the CLI Interpreter
 * Create a Server configuration and set mapping as source:/var/www/
 
+#### Turning Xdebug off when you do not need it
+
+Xdebug is loaded in every PHP process, including CLI. As long as its mode is
+anything other than `off`, it hooks the executor and every function call gets
+slower. Measured on PHP 8.4 in the php container:
+
+| xdebug.mode   | fib(27) |
+|---------------|---------|
+| debug,profile | 140 ms  |
+| debug         | 131 ms  |
+| profile       | 140 ms  |
+| develop       | 168 ms  |
+| off           | 15 ms   |
+
+Dropping `profile` alone does not help, only `off` does. Loop-heavy code without
+function calls is barely affected (58 ms against 53 ms), so how much you notice
+depends on the workload. Composer, PHPUnit and `oe-console` are hit hardest.
+
+`XDEBUG_MODE` in your `.env` controls this. It overrides `xdebug.mode` from
+`containers/php/xdebug.ini`, so no image rebuild is needed:
+
+```
+# .env
+XDEBUG_MODE=off
+```
+
+```
+make up
+```
+
+`make up` is required because the environment is baked in when the container is
+created. `docker compose restart` keeps the old value.
+
+Set it back to `debug` and run `make up` again when you want to debug.
+
 ### Multiserver configuration
 
 The SDK contains basic configuration for a load balancing setup using nginx. Information for creating such a setup can be found in the [sdk recipes repository](https://github.com/OXID-eSales/docker-eshop-sdk-recipes?tab=readme-ov-file#multiserver-configuration).
