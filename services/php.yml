@@ -8,6 +8,11 @@
         HOST_GROUP_ID: ${HOST_GROUP_ID}
         HOST_USER_NAME: ${HOST_USER_NAME}
         HOST_GROUP_NAME: ${HOST_GROUP_NAME}
+    environment:
+      # Overrides xdebug.mode from containers/php/xdebug.ini. The default keeps
+      # the previous behaviour. Set XDEBUG_MODE=off in .env while you are not
+      # debugging, see README "Remote debugging with PHPSTORM".
+      XDEBUG_MODE: ${XDEBUG_MODE:-debug,profile}
     links:
       - "apache:localhost.local"
       - "apache:oxideshop.local"
