@@ -7,8 +7,10 @@
       - php
     healthcheck:
       test: /opt/bin/check-grid.sh
-      interval: 1s
-      retries: 60
+      start_period: 300s
+      start_interval: 1s
+      interval: 30s
+      retries: 3
     ports:
       - ${PORT_BROWSER_CHROME_WEBDRIVER}:4444
       - ${PORT_BROWSER_CHROME_VNC}:5900

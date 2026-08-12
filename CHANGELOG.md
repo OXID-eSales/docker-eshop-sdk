@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Configurable MySQL memory limit via `MYSQL_MEMORY_LIMIT` (default 2G) to prevent host OOM from runaway MySQL memory usage
 
 ### Changed
+- MySQL and Selenium healthchecks poll every 30s once the service is up instead of every 2s and 1s forever; `start_interval` keeps startup detection at the previous speed. The permanent fast polling kept dockerd and containerd busy on completely idle stacks
 - Default Nginx configuration directory changed to fit development practices
 - Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems
