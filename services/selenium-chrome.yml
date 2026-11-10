@@ -1,5 +1,4 @@
   selenium:
-    platform: linux/x86_64
     image: 'selenium/standalone-chrome:latest'
     restart: "no"
     shm_size: 500M
