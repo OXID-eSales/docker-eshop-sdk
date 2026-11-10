@@ -1,5 +1,4 @@
   nginx:
-    platform: linux/x86_64
     image: oxidesales/oxideshop-docker-nginx:${NGINX_VERSION}
     restart: "no"
     ports:
