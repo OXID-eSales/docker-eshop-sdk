@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Default Nginx configuration directory changed to fit development practices
 - Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems
+- The selenium (chrome latest) service no longer sets `platform: linux/x86_64` and runs on the platform of the host; its image exists for amd64 and arm64. Nothing changes on x86_64 hosts
 - Extracted the variables with exposed PORTS to the env file, so it can be easier adjusted [PR-34](https://github.com/OXID-eSales/docker-eshop-sdk/pull/34)
 - Switched `restart` policy from `always` to `no` on all service containers to avoid containers auto-starting on host reboot; run `make up` to bring services back after a crash
 - The nginx service no longer sets `platform: linux/x86_64` and runs on the platform of the host; its image exists for amd64 and arm64. Nothing changes on x86_64 hosts
