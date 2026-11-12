@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - MySQL and Selenium healthchecks poll every 30s once the service is up instead of every 2s and 1s forever; `start_interval` keeps startup detection at the previous speed. The permanent fast polling kept dockerd and containerd busy on completely idle stacks
+- The apache, php and php-standalone services no longer set `platform: linux/x86_64` and run on the platform of the host; their images exist for amd64 and arm64. Nothing changes on x86_64 hosts. An existing `docker-compose.yml` keeps its pins until it is regenerated
 - Default Nginx configuration directory changed to fit development practices
 - Replace Mailhog with Mailpit service
 - Extended MySQL healthcheck time to give chance for slower systems

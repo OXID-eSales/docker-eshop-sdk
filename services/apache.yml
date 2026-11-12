@@ -1,5 +1,4 @@
   apache:
-    platform: linux/x86_64
     build:
       context: containers/httpd
     working_dir: /var/www/
