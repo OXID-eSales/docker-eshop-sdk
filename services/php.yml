@@ -2,6 +2,8 @@
     platform: linux/x86_64
     build:
       context: containers/php
+      additional_contexts:
+        certs: containers/httpd/certs
       args:
         PHP_VERSION: ${PHP_VERSION}
         HOST_USER_ID: ${HOST_USER_ID}

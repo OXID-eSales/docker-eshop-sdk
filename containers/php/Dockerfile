@@ -12,6 +12,10 @@ ARG SMTP_PORT
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
 
+# Trust the SDK's self-signed CA so PHP can reach the shop via HTTPS
+COPY --from=certs oxid_esales_localhost_ca.crt /usr/local/share/ca-certificates/oxid_esales_localhost_ca.crt
+RUN update-ca-certificates
+
 # set sendmail for php to ssmtp
 RUN printf "host mailpit\nport 1025" >> /etc/msmtprc
 

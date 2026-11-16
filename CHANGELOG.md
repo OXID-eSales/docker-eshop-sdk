@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NODE_VERSION environment variable for configuring the node container version
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
 - Service configuration for MySQL in-memory engine
+- Trust the SDK's self-signed CA in the php container, so php can reach the shop via HTTPS
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
