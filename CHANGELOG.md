@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add NODE_VERSION environment variable for configuring the node container version
 - Changed the deprecated image selenium/standalone-chrome-debug:3.141.59 to selenium/standalone-chrome:latest
 - Service configuration for MySQL in-memory engine
+- Trust the SDK's self-signed CA in the php container, so php can reach the shop via HTTPS
 
 ### Changed
 - Default Nginx configuration directory changed to fit development practices
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Replace echo with printf to make it work on Fedora
 - Improved the `make cleanup` command to cleanup better on partial file existance
 - Remove obsolete "version" option from docker-compose.yml.dist file
+- Add `oxideshop.local` to the server certificate, as documented in the README
 
 ## [v4.0.0] - 2022-01-11
 
